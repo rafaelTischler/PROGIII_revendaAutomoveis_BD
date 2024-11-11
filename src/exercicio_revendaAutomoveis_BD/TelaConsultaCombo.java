@@ -30,9 +30,7 @@ public class TelaConsultaCombo extends JFrame {
 	private final JComboBox comboAno = new JComboBox();
 	private final JLabel lblNewLabel = new JLabel("Consultar automóveis");
 
-	/**
-	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -46,9 +44,6 @@ public class TelaConsultaCombo extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	
 	private void preencherCombo() {
 		comboMarca.addItem("Selecione um nome: ");
@@ -135,26 +130,12 @@ public class TelaConsultaCombo extends JFrame {
 		this.tabela = new JTable();
 		this.tabela.setModel(new DefaultTableModel(
 			new Object[][] {
+				{null, null, null, null, null, null},
 			},
 			new String[] {
-				"ID", "NOME", "EMAIL", "CARGO"
+				"Id", "Marca", "Modelo", "Ano", "Cor", "Combustivel"
 			}
-		) {
-			boolean[] columnEditables = new boolean[] {
-				false, false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
-		this.tabela.getColumnModel().getColumn(0).setResizable(false);
-		this.tabela.getColumnModel().getColumn(0).setPreferredWidth(46);
-		this.tabela.getColumnModel().getColumn(1).setResizable(false);
-		this.tabela.getColumnModel().getColumn(1).setPreferredWidth(103);
-		this.tabela.getColumnModel().getColumn(2).setResizable(false);
-		this.tabela.getColumnModel().getColumn(2).setPreferredWidth(181);
-		this.tabela.getColumnModel().getColumn(3).setResizable(false);
-		this.tabela.getColumnModel().getColumn(3).setPreferredWidth(111);
+		));
 		this.scrollPane.setViewportView(this.tabela);
 		this.contentPane.setLayout(gl_contentPane);
 	}

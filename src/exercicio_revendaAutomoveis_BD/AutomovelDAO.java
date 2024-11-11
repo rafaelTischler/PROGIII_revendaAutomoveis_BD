@@ -36,7 +36,7 @@ public class AutomovelDAO {
 	
 	public boolean inserir(Automovel A) {
 		
-		String sql = "insert into automovel (marca, modelo, ano, cor, combustivel) values (?, ?, ?)";		
+		String sql = "insert into automovel (marca, modelo, ano, cor, combustivel) values (?, ?, ?, ?, ?)";		
 		
 		try {
 			PreparedStatement ps = (PreparedStatement)

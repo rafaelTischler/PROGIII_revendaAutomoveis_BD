@@ -14,6 +14,10 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import net.miginfocom.swing.MigLayout;
+import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.Color;
 
 public class TelaCadastro extends JFrame {
 
@@ -26,9 +30,9 @@ public class TelaCadastro extends JFrame {
 	private JTextField marca;
 	private JTextField modelo;
 	private JTextField ano;
-	private JTextField cor;
-	private JTextField combustivel;
 	private JButton botao;
+	private JTextField combustivel;
+	private JTextField cor;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -59,11 +63,13 @@ public class TelaCadastro extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 587, 430);
 		this.contentPane = new JPanel();
+		contentPane.setBackground(SystemColor.activeCaption);
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(this.contentPane);
 
-		this.lblNewLabel = new JLabel("<html><h1>Inserir Funcion\u00E1rios</h1></html>");
+		this.lblNewLabel = new JLabel("             Inserir Automóvel");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 
 		this.lblNewLabel_1 = new JLabel("Marca:");
 
@@ -72,6 +78,7 @@ public class TelaCadastro extends JFrame {
 		this.lblNewLabel_3 = new JLabel("Ano:");
 
 		this.marca = new JTextField();
+		marca.setBackground(new Color(255, 255, 255));
 		this.marca.setColumns(10);
 
 		this.modelo = new JTextField();
@@ -86,48 +93,28 @@ public class TelaCadastro extends JFrame {
 				acaoBotao();
 			}
 		});
-		GroupLayout gl_contentPane = new GroupLayout(this.contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
-				.createSequentialGroup().addGap(129)
-				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup().addGap(118).addComponent(this.lblNewLabel))
-						.addGroup(gl_contentPane.createSequentialGroup()
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(this.lblNewLabel_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(this.lblNewLabel_2, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(this.lblNewLabel_3, Alignment.TRAILING,
-												GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_contentPane.createSequentialGroup()
-												.addPreferredGap(ComponentPlacement.RELATED).addComponent(this.ano,
-														GroupLayout.PREFERRED_SIZE, 334, GroupLayout.PREFERRED_SIZE))
-										.addGroup(Alignment.TRAILING,
-												gl_contentPane.createSequentialGroup()
-														.addPreferredGap(ComponentPlacement.RELATED)
-														.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-																.addComponent(this.marca, GroupLayout.PREFERRED_SIZE,
-																		334, GroupLayout.PREFERRED_SIZE)
-																.addComponent(this.modelo, GroupLayout.PREFERRED_SIZE,
-																		334, GroupLayout.PREFERRED_SIZE)))))
-						.addGroup(gl_contentPane.createSequentialGroup().addGap(207).addComponent(this.botao)))
-				.addContainerGap(183, Short.MAX_VALUE)));
-		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup().addGap(45).addComponent(this.lblNewLabel).addGap(63)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(this.lblNewLabel_1).addComponent(this.marca, GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(this.modelo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(this.lblNewLabel_2))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(this.lblNewLabel_3).addComponent(this.ano, GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGap(50).addComponent(this.botao).addContainerGap(79, Short.MAX_VALUE)));
-		this.contentPane.setLayout(gl_contentPane);
+		contentPane.setLayout(new MigLayout("", "[grow][85px][200.00][41.00][grow]", "[grow][49px][20px][20px][20px][20px][20px][23px][grow]"));
+		
+		JLabel lblNewLabel_3_1_1 = new JLabel("Combustivel:");
+		contentPane.add(lblNewLabel_3_1_1, "cell 1 4,alignx right,aligny bottom");
+		
+		combustivel = new JTextField();
+		combustivel.setColumns(10);
+		contentPane.add(combustivel, "cell 2 4,growx,aligny top");
+		contentPane.add(botao, "cell 2 7,alignx center,aligny top");
+		contentPane.add(lblNewLabel, "cell 1 1 2 1,alignx center,growy");
+		contentPane.add(lblNewLabel_1, "cell 1 2,alignx right,aligny center");
+		contentPane.add(lblNewLabel_3, "cell 1 5,alignx right,aligny center");
+		contentPane.add(lblNewLabel_2, "cell 1 3,alignx right,aligny center");
+		contentPane.add(ano, "flowx,cell 2 5,growx,aligny top");
+		contentPane.add(modelo, "cell 2 3,growx,aligny top");
+		contentPane.add(marca, "cell 2 2,growx,aligny top");
+		
+		JLabel lblNewLabel_3_1 = new JLabel("Cor:");
+		contentPane.add(lblNewLabel_3_1, "cell 2 5,alignx right,aligny center");
+		
+		cor = new JTextField();
+		cor.setColumns(10);
+		contentPane.add(cor, "cell 2 5,growx,aligny top");
 	}
 }
