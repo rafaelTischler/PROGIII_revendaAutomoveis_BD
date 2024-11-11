@@ -9,7 +9,7 @@ public class Conexao {
 	public static Connection getConexao() {
 		try {
 			return (Connection) DriverManager.getConnection(
-					"jdbc:mysql://localhost/agenda", "root", "");
+					"jdbc:mysql://localhost/bd_automoveis", "root", "");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			return null;

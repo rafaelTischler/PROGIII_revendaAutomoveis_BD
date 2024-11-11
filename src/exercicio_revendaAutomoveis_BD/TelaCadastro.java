@@ -15,7 +15,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class TelaInserir extends JFrame {
+public class TelaCadastro extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -23,16 +23,18 @@ public class TelaInserir extends JFrame {
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
-	private JTextField nome;
-	private JTextField email;
-	private JTextField cargo;
+	private JTextField marca;
+	private JTextField modelo;
+	private JTextField ano;
+	private JTextField cor;
+	private JTextField combustivel;
 	private JButton botao;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaInserir frame = new TelaInserir();
+					TelaCadastro frame = new TelaCadastro();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,14 +44,14 @@ public class TelaInserir extends JFrame {
 	}
 
 	private void acaoBotao() {
-		Funcionario f = new Funcionario(nome.getText(), email.getText(), cargo.getText());
-		FuncionarioDAO dao = new FuncionarioDAO();
+		Automovel f = new Automovel(marca.getText(), modelo.getText(), ano.getText(), cor.getText(), combustivel.getText());
+		AutomovelDAO dao = new AutomovelDAO();
 		if (!dao.inserir(f)) {
 			JOptionPane.showMessageDialog(null, "Inserido");
 		}
 	}
 
-	public TelaInserir() {
+	public TelaCadastro() {
 		initComponents();
 	}
 
@@ -63,20 +65,20 @@ public class TelaInserir extends JFrame {
 
 		this.lblNewLabel = new JLabel("<html><h1>Inserir Funcion\u00E1rios</h1></html>");
 
-		this.lblNewLabel_1 = new JLabel("Nome:");
+		this.lblNewLabel_1 = new JLabel("Marca:");
 
-		this.lblNewLabel_2 = new JLabel("Email:");
+		this.lblNewLabel_2 = new JLabel("Modelo:");
 
-		this.lblNewLabel_3 = new JLabel("Cargo:");
+		this.lblNewLabel_3 = new JLabel("Ano:");
 
-		this.nome = new JTextField();
-		this.nome.setColumns(10);
+		this.marca = new JTextField();
+		this.marca.setColumns(10);
 
-		this.email = new JTextField();
-		this.email.setColumns(10);
+		this.modelo = new JTextField();
+		this.modelo.setColumns(10);
 
-		this.cargo = new JTextField();
-		this.cargo.setColumns(10);
+		this.ano = new JTextField();
+		this.ano.setColumns(10);
 
 		this.botao = new JButton("Inserir");
 		this.botao.addActionListener(new ActionListener() {
@@ -99,31 +101,31 @@ public class TelaInserir extends JFrame {
 												GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE))
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 										.addGroup(gl_contentPane.createSequentialGroup()
-												.addPreferredGap(ComponentPlacement.RELATED).addComponent(this.cargo,
+												.addPreferredGap(ComponentPlacement.RELATED).addComponent(this.ano,
 														GroupLayout.PREFERRED_SIZE, 334, GroupLayout.PREFERRED_SIZE))
 										.addGroup(Alignment.TRAILING,
 												gl_contentPane.createSequentialGroup()
 														.addPreferredGap(ComponentPlacement.RELATED)
 														.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-																.addComponent(this.nome, GroupLayout.PREFERRED_SIZE,
+																.addComponent(this.marca, GroupLayout.PREFERRED_SIZE,
 																		334, GroupLayout.PREFERRED_SIZE)
-																.addComponent(this.email, GroupLayout.PREFERRED_SIZE,
+																.addComponent(this.modelo, GroupLayout.PREFERRED_SIZE,
 																		334, GroupLayout.PREFERRED_SIZE)))))
 						.addGroup(gl_contentPane.createSequentialGroup().addGap(207).addComponent(this.botao)))
 				.addContainerGap(183, Short.MAX_VALUE)));
 		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup().addGap(45).addComponent(this.lblNewLabel).addGap(63)
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(this.lblNewLabel_1).addComponent(this.nome, GroupLayout.PREFERRED_SIZE,
+								.addComponent(this.lblNewLabel_1).addComponent(this.marca, GroupLayout.PREFERRED_SIZE,
 										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(this.email, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								.addComponent(this.modelo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE)
 								.addComponent(this.lblNewLabel_2))
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(this.lblNewLabel_3).addComponent(this.cargo, GroupLayout.PREFERRED_SIZE,
+								.addComponent(this.lblNewLabel_3).addComponent(this.ano, GroupLayout.PREFERRED_SIZE,
 										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addGap(50).addComponent(this.botao).addContainerGap(79, Short.MAX_VALUE)));
 		this.contentPane.setLayout(gl_contentPane);

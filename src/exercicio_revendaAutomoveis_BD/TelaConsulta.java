@@ -43,11 +43,11 @@ public class TelaConsulta extends JFrame {
 		initComponents();
 	}
 
-	public void consultarFuncionarios() {
-		FuncionarioDAO fdao = new FuncionarioDAO();
-		LinkedList<Funcionario> funcionarios = fdao.listar();
-		for (Funcionario funcionario : funcionarios) {
-			saida.append(funcionario.toString());
+	public void consultarAutomovel() {
+		AutomovelDAO AutoDao = new AutomovelDAO();
+		LinkedList<Automovel> automoveis = AutoDao.listar();
+		for (Automovel automovel : automoveis) {
+			saida.append(automovel.toString());
 		}
 	}
 
@@ -62,7 +62,7 @@ public class TelaConsulta extends JFrame {
 		this.consultar = new JButton("<html><h1>Listar Funcion\u00E1rios</h1></html>");
 		this.consultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				consultarFuncionarios();
+				consultarAutomovel();
 			}
 		});
 
