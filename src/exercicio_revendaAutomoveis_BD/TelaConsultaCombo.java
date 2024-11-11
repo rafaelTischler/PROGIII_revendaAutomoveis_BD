@@ -10,7 +10,6 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
@@ -23,16 +22,13 @@ public class TelaConsultaCombo extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JComboBox comboMarca;
+	private JComboBox<String> comboMarca;
 	private JScrollPane scrollPane;
 	private JTable tabela;
-	private final JComboBox comboModelo = new JComboBox();
-	private final JComboBox comboAno = new JComboBox();
+	private final JComboBox<String> comboModelo = new JComboBox<String>();
+	private final JComboBox<String> comboAno = new JComboBox<String>();
 	private final JLabel lblNewLabel = new JLabel("Consultar automóveis");
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -46,15 +42,10 @@ public class TelaConsultaCombo extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	
-	private void preencherCombo() {
-		comboMarca.addItem("Selecione um nome: ");
+	private void preencherComboMarcas() {
 		AutomovelDAO dao = new AutomovelDAO(); 
-		LinkedList<String> nomes = dao.listarNomes();
-		for(String nome : nomes) {
+		LinkedList<String> marcas = dao.listarMarcas();
+		for(String nome : marcas) {
 			comboMarca.addItem(nome);
 		}
 	}
@@ -76,7 +67,7 @@ public class TelaConsultaCombo extends JFrame {
 		this.comboAno.setModel(new DefaultComboBoxModel(new String[] {"Selecione um ano de fabricação:"}));
 		this.comboModelo.setModel(new DefaultComboBoxModel(new String[] {"Selecione um modelo:"}));
 		initComponents();
-		preencherCombo();
+		preencherComboMarcas();
 	}
 	
 	
@@ -106,10 +97,10 @@ public class TelaConsultaCombo extends JFrame {
 							.addGap(47)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(comboMarca, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
-									.addGap(32)
-									.addComponent(this.comboModelo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addGap(29)
+									.addComponent(comboMarca, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
+									.addGap(30)
+									.addComponent(this.comboModelo, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
 									.addComponent(this.comboAno, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 548, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_contentPane.createSequentialGroup()
@@ -135,26 +126,12 @@ public class TelaConsultaCombo extends JFrame {
 		this.tabela = new JTable();
 		this.tabela.setModel(new DefaultTableModel(
 			new Object[][] {
+				{null, null, null, null, null, null},
 			},
 			new String[] {
-				"ID", "NOME", "EMAIL", "CARGO"
+				"id", "marca", "modelo", "ano", "cor", "combustivel"
 			}
-		) {
-			boolean[] columnEditables = new boolean[] {
-				false, false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
-		this.tabela.getColumnModel().getColumn(0).setResizable(false);
-		this.tabela.getColumnModel().getColumn(0).setPreferredWidth(46);
-		this.tabela.getColumnModel().getColumn(1).setResizable(false);
-		this.tabela.getColumnModel().getColumn(1).setPreferredWidth(103);
-		this.tabela.getColumnModel().getColumn(2).setResizable(false);
-		this.tabela.getColumnModel().getColumn(2).setPreferredWidth(181);
-		this.tabela.getColumnModel().getColumn(3).setResizable(false);
-		this.tabela.getColumnModel().getColumn(3).setPreferredWidth(111);
+		));
 		this.scrollPane.setViewportView(this.tabela);
 		this.contentPane.setLayout(gl_contentPane);
 	}

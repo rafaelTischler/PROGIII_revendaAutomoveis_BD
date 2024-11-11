@@ -14,21 +14,21 @@ public class AutomovelDAO {
 		this.conexao = Conexao.getConexao();
 	}
 	
-	public LinkedList<String> listarNomes(){
-		String sql = "select nome from automovel";
-		LinkedList<String> nomes = new LinkedList<String>();
+	public LinkedList<String> listarMarcas(){
+		String sql = "SELECT marca FROM automovel";
+		LinkedList<String> marcas = new LinkedList<String>();
 		try {
 			PreparedStatement ps = (PreparedStatement) 
 					conexao.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();			
 			while(rs.next()) {				
-				nomes.add(rs.getString("nome"));
+				marcas.add(rs.getString("marca"));
 			}		
 			ps.close();
 			rs.close();
-			return nomes;
+			return marcas;
 		} catch (SQLException e) {
-			System.out.println("Erro ao consultar Automoveis");
+			System.out.println("Erro ao consultar automoveis");
 			return null;
 		}
 		
@@ -36,7 +36,7 @@ public class AutomovelDAO {
 	
 	public boolean inserir(Automovel A) {
 		
-		String sql = "insert into automovel (marca, modelo, ano, cor, combustivel) values (?, ?, ?)";		
+		String sql = "INSERT INTO automovel (marca, modelo, ano, cor, combustivel) VALUES (?, ?, ?, ?, ?)";		
 		
 		try {
 			PreparedStatement ps = (PreparedStatement)
@@ -50,7 +50,7 @@ public class AutomovelDAO {
 			ps.close();
 			return retorno;
 		} catch (SQLException e) {
-			System.out.println("Erro ao Inserir Automoveis");
+			System.out.println("Erro ao Inserir automoveis");
 			return false;
 		}
 		
@@ -58,7 +58,7 @@ public class AutomovelDAO {
 	
 	
 	public Automovel consultarMarca(String marca){
-		String sql = "select * from automovel where marca = ?";		
+		String sql = "SELECT * FROM automovel WHERE marca = ?";		
 		try {
 			PreparedStatement ps = (PreparedStatement) 
 					conexao.prepareStatement(sql);
@@ -73,7 +73,7 @@ public class AutomovelDAO {
 			ps.close();
 			return null;
 		} catch (SQLException e) {
-			System.out.println("Erro ao consultar Automoveis");
+			System.out.println("Erro ao consultar automoveis");
 			return null;
 		}
 		
@@ -81,7 +81,7 @@ public class AutomovelDAO {
 	
 	
 	public LinkedList<Automovel> listar(){
-		String sql = "select * from automovel";
+		String sql = "SELECT * FROM automovel";
 		LinkedList<Automovel> lista = new LinkedList<Automovel>();
 		try {
 			PreparedStatement ps = (PreparedStatement) 
