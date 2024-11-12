@@ -45,20 +45,23 @@ public class TelaConsultaCombo extends JFrame {
 	private void preencherComboMarcas() {
 		AutomovelDAO dao = new AutomovelDAO();
 		LinkedList<String> marcas = dao.listarMarcas();
-		for (String nome : marcas) {
-			comboMarca.addItem(nome);
+		for (String marca : marcas) {
+			comboMarca.addItem(marca);
 		}
 	}
 
 	private void acaoCombo() {
 		AutomovelDAO dao = new AutomovelDAO();
 		DefaultTableModel model = (DefaultTableModel) tabela.getModel();
-		if (!comboMarca.getSelectedItem().equals("Selecione um nome: ")) {
-			Automovel a = dao.consultarMarca(comboMarca.getSelectedItem() + "");
-			model.setRowCount(0);
-			model.addRow(new String[] { a.getId() + "", a.getMarca(), a.getModelo(), a.getCor(), a.getCombustivel() });
-		} else {
-			model.setRowCount(0);
+		LinkedList<Automovel> automoveis = dao.listar();
+		model.setRowCount(0);
+		if (!comboMarca.getSelectedItem().equals("Selecione uma marca: ")) {
+			String marcaSelecionada = comboMarca.getSelectedItem().toString();
+			for (Automovel auto : automoveis) {
+				if (auto.getMarca().equals(marcaSelecionada)) {
+					model.addRow(new String[] { auto.getId() + "", auto.getMarca(), auto.getModelo(), auto.getAno(), auto.getCor(), auto.getCombustivel() });
+				}
+			}
 		}
 	}
 
@@ -88,55 +91,33 @@ public class TelaConsultaCombo extends JFrame {
 
 		this.scrollPane = new JScrollPane();
 		GroupLayout gl_contentPane = new GroupLayout(this.contentPane);
-		gl_contentPane.setHorizontalGroup(
-				gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_contentPane.createSequentialGroup()
-												.addGap(47)
-												.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-														.addGroup(gl_contentPane.createSequentialGroup()
-																.addComponent(comboMarca, GroupLayout.PREFERRED_SIZE,
-																		139, GroupLayout.PREFERRED_SIZE)
-																.addGap(30)
-																.addComponent(this.comboModelo,
-																		GroupLayout.PREFERRED_SIZE, 180,
-																		GroupLayout.PREFERRED_SIZE)
-																.addGap(18)
-																.addComponent(this.comboAno, 0,
-																		GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-														.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 548,
-																GroupLayout.PREFERRED_SIZE)))
-										.addGroup(gl_contentPane.createSequentialGroup()
-												.addGap(203)
-												.addComponent(this.lblNewLabel, GroupLayout.PREFERRED_SIZE, 266,
-														GroupLayout.PREFERRED_SIZE)))
-								.addContainerGap(78, Short.MAX_VALUE)));
-		gl_contentPane.setVerticalGroup(
-				gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-								.addContainerGap(58, Short.MAX_VALUE)
-								.addComponent(this.lblNewLabel)
-								.addGap(18)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-										.addComponent(comboMarca, GroupLayout.PREFERRED_SIZE, 37,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(this.comboModelo, GroupLayout.PREFERRED_SIZE, 33,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(this.comboAno, GroupLayout.PREFERRED_SIZE, 33,
-												GroupLayout.PREFERRED_SIZE))
-								.addGap(18)
-								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
-								.addGap(78)));
+		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
+				.createSequentialGroup()
+				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
+						.createSequentialGroup().addGap(47)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false).addGroup(gl_contentPane
+								.createSequentialGroup()
+								.addComponent(comboMarca, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
+								.addGap(30)
+								.addComponent(this.comboModelo, GroupLayout.PREFERRED_SIZE, 180,
+										GroupLayout.PREFERRED_SIZE)
+								.addGap(18).addComponent(this.comboAno, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 548, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_contentPane.createSequentialGroup().addGap(203).addComponent(this.lblNewLabel,
+								GroupLayout.PREFERRED_SIZE, 266, GroupLayout.PREFERRED_SIZE)))
+				.addContainerGap(78, Short.MAX_VALUE)));
+		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING).addGroup(gl_contentPane
+				.createSequentialGroup().addContainerGap(58, Short.MAX_VALUE).addComponent(this.lblNewLabel).addGap(18)
+				.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(comboMarca, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+						.addComponent(this.comboModelo, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+						.addComponent(this.comboAno, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+				.addGap(18).addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
+				.addGap(78)));
 
 		this.tabela = new JTable();
-		this.tabela.setModel(new DefaultTableModel(
-				new Object[][] {
-						{ null, null, null, null, null, null },
-				},
-				new String[] {
-						"id", "marca", "modelo", "ano", "cor", "combustivel"
-				}));
+		this.tabela.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null }, },
+				new String[] { "id", "marca", "modelo", "ano", "cor", "combustivel" }));
 		this.scrollPane.setViewportView(this.tabela);
 		this.contentPane.setLayout(gl_contentPane);
 	}

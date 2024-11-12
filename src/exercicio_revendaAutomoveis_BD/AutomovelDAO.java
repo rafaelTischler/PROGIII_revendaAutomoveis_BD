@@ -15,13 +15,14 @@ public class AutomovelDAO {
 	}
 	
 	public LinkedList<String> listarMarcas(){
-		String sql = "SELECT marca FROM automovel";
+		String sql = "SELECT DISTINCT marca FROM automovel";
 		LinkedList<String> marcas = new LinkedList<String>();
 		try {
 			PreparedStatement ps = (PreparedStatement) 
 					conexao.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();			
-			while(rs.next()) {				
+			while(rs.next()) {			
+				System.out.println("marca: " + marcas);
 				marcas.add(rs.getString("marca"));
 			}		
 			ps.close();
