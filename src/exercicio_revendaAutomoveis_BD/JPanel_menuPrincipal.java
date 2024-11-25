@@ -18,10 +18,10 @@ public class JPanel_menuPrincipal extends JPanel {
 	private final JLabel txtMenu = new JLabel("Menu Principal");
 	private final JButton btn_cadastrar = new JButton("Cadastrar");
 	private final JButton btn_consultar = new JButton("Consultar");
-	private final JButton btn_alterar = new JButton("Alterar");
+	private final JButton btn_alterar = new JButton("Alterar/Excluir");
 	private final JButton btn_sair = new JButton("Sair");
 	private final JLabel lblNewLabel = new JLabel(
-			"<html>\r\n\t<div style='text-align: center;'>\r\n\t\t<p>AGENDA DE</p>\r\n\t\t<h1>CONTATOS</h1>\r\n\t<div>\r\n<html>");
+			"<html>\r\n\t<div style='text-align: center;'>\r\n\t\t<p>REVENDA DE</p>\r\n\t\t<h1>AUTOMÓVEIS</h1>\r\n\t<div>\r\n<html>");
 
 	public JPanel_menuPrincipal() {
 		initComponents();
