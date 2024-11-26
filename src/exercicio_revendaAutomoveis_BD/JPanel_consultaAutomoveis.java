@@ -60,6 +60,7 @@ public class JPanel_consultaAutomoveis extends JPanel {
 
     private void initComponents() {
         setBorder(new EmptyBorder(5, 5, 5, 5));
+        setBounds(100, 100, 800, 600);
 
         this.comboMarca = new JComboBox<>();
         comboMarca.setModel(new DefaultComboBoxModel<>(new String[] { "Selecione uma marca:" }));
