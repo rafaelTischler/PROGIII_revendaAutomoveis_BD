@@ -31,7 +31,7 @@ public class JPanel_menuPrincipal extends JPanel {
 	private void initComponents() {
 		setBounds(100, 100, 800, 600);
 		setLayout(new MigLayout("", "[]", "[]"));
-		setBackground(new Color(129, 178, 154));
+		setBackground(new Color(0, 51, 102));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new MigLayout("", "[][150.00][][grow]", "[][grow][]"));
 		this.panel.setBackground(new Color(61, 64, 91));

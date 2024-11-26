@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
+import java.awt.Color;
 
 public class JPanel_consultaAutomoveis extends JPanel {
 
@@ -28,6 +29,8 @@ public class JPanel_consultaAutomoveis extends JPanel {
     private final JLabel lblNewLabel = new JLabel("Consultar Automóveis");
 
     public JPanel_consultaAutomoveis() {
+    	setBackground(new Color(0, 51, 102));
+        lblNewLabel.setForeground(new Color(255, 255, 255));
         this.lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
         this.comboAno.setModel(new DefaultComboBoxModel<>(new String[] { "Selecione um ano de fabricação:" }));
         this.comboModelo.setModel(new DefaultComboBoxModel<>(new String[] { "Selecione um modelo:" }));
