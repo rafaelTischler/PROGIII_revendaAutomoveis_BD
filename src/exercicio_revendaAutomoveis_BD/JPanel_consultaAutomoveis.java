@@ -78,11 +78,11 @@ public class JPanel_consultaAutomoveis extends JPanel {
                 new Object[][] { { null, null, null, null, null, null }, },
                 new String[] { "id", "marca", "modelo", "ano", "cor", "combustivel" }));
         this.scrollPane.setViewportView(this.tabela);
-        setLayout(new MigLayout("", "[grow][139px][17px][193px][18px][181px][grow]", "[grow][25px][37px][174px][grow]"));
+        setLayout(new MigLayout("", "[70.00,grow][154.00px][17px][210.00px][18px][181px][grow]", "[grow][25px][37px][226.00px][grow]"));
         add(comboMarca, "cell 1 2,grow");
         add(comboModelo, "cell 3 2,grow");
         add(comboAno, "cell 5 2,alignx left,growy");
         add(scrollPane, "cell 1 3 5 1,grow");
-        add(lblNewLabel, "cell 3 1 3 1,alignx left,aligny top");
+        add(lblNewLabel, "cell 3 1,alignx center,growy");
     }
 }
