@@ -28,7 +28,7 @@ public class JPanel_menuPrincipal extends JPanel {
 	}
 
 	private void initComponents() {
-		setBounds(100, 100, 640, 480);
+		setBounds(100, 100, 800, 600);
 		setLayout(new MigLayout("", "[]", "[]"));
 		setBackground(new Color(129, 178, 154));
 		setBorder(new EmptyBorder(5, 5, 5, 5));

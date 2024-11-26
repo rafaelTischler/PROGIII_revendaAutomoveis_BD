@@ -44,6 +44,7 @@ public class JPanel_cadastroAutomoveis extends JPanel {
 
     private void initComponents() {
         setBorder(new EmptyBorder(5, 5, 5, 5));
+        setBounds(100, 100, 800, 600);
 
         this.lblNewLabel = new JLabel("<html><h1>Inserir Automóvel</h1></html>");
 
