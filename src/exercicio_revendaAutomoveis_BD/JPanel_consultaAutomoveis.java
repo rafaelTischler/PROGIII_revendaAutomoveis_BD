@@ -15,6 +15,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.border.EmptyBorder;
+import net.miginfocom.swing.MigLayout;
 
 public class JPanel_consultaAutomoveis extends JPanel {
 
@@ -24,7 +25,7 @@ public class JPanel_consultaAutomoveis extends JPanel {
     private JTable tabela;
     private final JComboBox<String> comboModelo = new JComboBox<String>();
     private final JComboBox<String> comboAno = new JComboBox<String>();
-    private final JLabel lblNewLabel = new JLabel("Consultar automóveis");
+    private final JLabel lblNewLabel = new JLabel("Consultar Automóveis");
 
     public JPanel_consultaAutomoveis() {
         this.lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -72,40 +73,16 @@ public class JPanel_consultaAutomoveis extends JPanel {
 
         this.scrollPane = new JScrollPane();
 
-        GroupLayout layout = new GroupLayout(this);
-        layout.setHorizontalGroup(layout.createParallelGroup(Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup().addGap(47)
-                                .addGroup(layout.createParallelGroup(Alignment.LEADING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(comboMarca, GroupLayout.PREFERRED_SIZE, 139,
-                                                        GroupLayout.PREFERRED_SIZE)
-                                                .addGap(30)
-                                                .addComponent(this.comboModelo, GroupLayout.PREFERRED_SIZE, 180,
-                                                        GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18).addComponent(this.comboAno, 0, GroupLayout.DEFAULT_SIZE,
-                                                        Short.MAX_VALUE))
-                                        .addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 548,
-                                                GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup().addGap(203).addComponent(this.lblNewLabel,
-                                GroupLayout.PREFERRED_SIZE, 266, GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(78, Short.MAX_VALUE)));
-        layout.setVerticalGroup(layout.createParallelGroup(Alignment.TRAILING)
-                .addGroup(layout.createSequentialGroup().addContainerGap(58, Short.MAX_VALUE).addComponent(this.lblNewLabel)
-                        .addGap(18)
-                        .addGroup(layout.createParallelGroup(Alignment.BASELINE)
-                                .addComponent(comboMarca, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(this.comboModelo, GroupLayout.PREFERRED_SIZE, 33,
-                                        GroupLayout.PREFERRED_SIZE)
-                                .addComponent(this.comboAno, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-                        .addGap(18).addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
-                        .addGap(78)));
-
         this.tabela = new JTable();
         this.tabela.setModel(new DefaultTableModel(
                 new Object[][] { { null, null, null, null, null, null }, },
                 new String[] { "id", "marca", "modelo", "ano", "cor", "combustivel" }));
         this.scrollPane.setViewportView(this.tabela);
-        this.setLayout(layout);
+        setLayout(new MigLayout("", "[grow][139px][17px][193px][18px][181px][grow]", "[grow][25px][37px][174px][grow]"));
+        add(comboMarca, "cell 1 2,grow");
+        add(comboModelo, "cell 3 2,grow");
+        add(comboAno, "cell 5 2,alignx left,growy");
+        add(scrollPane, "cell 1 3 5 1,grow");
+        add(lblNewLabel, "cell 3 1 3 1,alignx left,aligny top");
     }
 }
