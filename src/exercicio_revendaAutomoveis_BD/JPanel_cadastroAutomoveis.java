@@ -9,82 +9,52 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import net.miginfocom.swing.MigLayout;
+import java.awt.Color;
+import java.awt.Panel;
+import java.awt.Font;
 
 public class JPanel_cadastroAutomoveis extends JPanel {
 
-    private static final long serialVersionUID = 1L;
-    private JLabel lblNewLabel;
-    private JLabel lblNewLabel_1;
-    private JLabel lblNewLabel_2;
-    private JLabel lblNewLabel_3;
-    private JTextField marca;
-    private JTextField modelo;
-    private JTextField ano;
-    private JButton botao;
-    private final JTextField cor = new JTextField();
-    private final JTextField comb = new JTextField();
-    private final JLabel lblNewLabel_3_1 = new JLabel("Cor:");
-    private final JLabel lblNewLabel_3_1_1 = new JLabel("Combustível");
-    private JLabel lblNewLabel_4;
+	private static final long serialVersionUID = 1L;
+	private final JPanel panel = new JPanel();
+	private final JLabel lblNewLabel = new JLabel("cadastroAutomoveis");
+	private final JLabel lblNewLabel_1 = new JLabel("Marca:");
+	private final JLabel lblNewLabel_2 = new JLabel("Modelo:");
+	private final JLabel lblNewLabel_3 = new JLabel("Ano:");
+	private final JLabel lblNewLabel_4 = new JLabel("Cor:");
+	private final JLabel lblNewLabel_5 = new JLabel("Combustível:");
+	private final JTextField edit_marca = new JTextField();
+	private final JTextField edit_modelo = new JTextField();
+	private final JTextField edit_ano = new JTextField();
+	private final JTextField edit_cor = new JTextField();
+	private final JTextField edit_combustivel = new JTextField();
 
-    public JPanel_cadastroAutomoveis() {
-        this.comb.setColumns(10);
-        this.cor.setColumns(10);
-        initComponents();
-    }
+	public JPanel_cadastroAutomoveis() {
+		this.edit_combustivel.setColumns(10);
+		this.edit_cor.setColumns(10);
+		this.edit_ano.setColumns(10);
+		this.edit_modelo.setColumns(10);
+		this.edit_marca.setColumns(10);
+		initComponents();
+	}
 
-    private void acaoBotao() {
-        Automovel f = new Automovel(marca.getText(), modelo.getText(), ano.getText(), cor.getText(),
-                comb.getText());
-        AutomovelDAO dao = new AutomovelDAO();
-        if (!dao.inserir(f)) {
-            JOptionPane.showMessageDialog(null, "Inserido");
-        }
-    }
-
-    private void initComponents() {
-        setBorder(new EmptyBorder(5, 5, 5, 5));
-
-        this.lblNewLabel = new JLabel("<html><h1>Inserir Automóvel</h1></html>");
-
-        this.lblNewLabel_1 = new JLabel("Marca:");
-        this.lblNewLabel_2 = new JLabel("Modelo:");
-        this.lblNewLabel_3 = new JLabel("Ano:");
-
-        this.marca = new JTextField();
-        this.marca.setColumns(10);
-
-        this.modelo = new JTextField();
-        this.modelo.setColumns(10);
-
-        this.ano = new JTextField();
-        this.ano.setColumns(10);
-
-        this.botao = new JButton("Inserir");
-        this.botao.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                acaoBotao();
-            }
-        });
-
-        setLayout(new MigLayout("", "[grow][85px][200.00][41.00][grow]",
-                "[grow][49px][20px][20px][20px][20px][20px][23px][grow]"));
-
-        add(lblNewLabel, "cell 1 1 2 1,alignx center,growy");
-        add(lblNewLabel_1, "cell 1 2,alignx right,aligny center");
-        add(lblNewLabel_2, "cell 1 3,alignx right,aligny center");
-        add(lblNewLabel_3, "cell 1 5,alignx right,aligny center");
-        add(lblNewLabel_3_1_1, "cell 1 4,alignx right,aligny bottom");
-
-        add(marca, "cell 2 2,growx,aligny top");
-        add(modelo, "cell 2 3,growx,aligny top");
-        add(ano, "flowx,cell 2 5,growx,aligny top");
-        
-        lblNewLabel_4 = new JLabel("Cor:");
-        add(lblNewLabel_4, "cell 2 5");
-        add(cor, "cell 2 5,growx,aligny top");
-        add(comb, "cell 2 4,growx,aligny top");
-
-        add(botao, "cell 2 7,alignx center,aligny top");
-    }
+	private void initComponents() {
+		setBackground(Color.DARK_GRAY);
+		setBounds(100, 100, 800, 600);
+		setLayout(new MigLayout("", "[grow][grow][grow]", "[grow][grow][grow]"));
+		add(this.panel, "cell 1 1,grow");
+		this.panel.setLayout(new MigLayout("", "[grow][][grow][grow]", "[grow][][][][][][][][grow]"));
+		this.lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		this.panel.add(this.lblNewLabel, "cell 1 1");
+		this.panel.add(this.lblNewLabel_1, "cell 1 3,alignx trailing");
+		this.panel.add(this.edit_marca, "cell 2 3,growx");
+		this.panel.add(this.lblNewLabel_2, "cell 1 4,alignx trailing");
+		this.panel.add(this.edit_modelo, "cell 2 4,growx");
+		this.panel.add(this.lblNewLabel_3, "cell 1 5,alignx trailing");
+		this.panel.add(this.edit_ano, "cell 2 5,growx");
+		this.panel.add(this.lblNewLabel_4, "cell 1 6,alignx trailing");
+		this.panel.add(this.edit_cor, "cell 2 6,growx");
+		this.panel.add(this.lblNewLabel_5, "cell 1 7,alignx trailing,aligny center");
+		this.panel.add(this.edit_combustivel, "cell 2 7,growx");
+	}
 }
