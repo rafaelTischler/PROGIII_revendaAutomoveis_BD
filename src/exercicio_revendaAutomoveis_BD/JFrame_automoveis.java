@@ -15,7 +15,7 @@ public class JFrame_automoveis extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					JFrame_automoveis frame = new JFrame_automoveis();
+					frame = new JFrame_automoveis();
 					frame = new JFrame_automoveis();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -27,7 +27,7 @@ public class JFrame_automoveis extends JFrame {
 
 	public JFrame_automoveis() {
 		initComponents();
-		this.setContentPane(new JPanel_alterarAutomoveis());
+		this.setContentPane(new JPanel_menuPrincipal());
 	}
 
 	public void initComponents() {

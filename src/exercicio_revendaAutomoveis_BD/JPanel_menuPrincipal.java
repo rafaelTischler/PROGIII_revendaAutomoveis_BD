@@ -25,6 +25,7 @@ public class JPanel_menuPrincipal extends JPanel {
 
 	public JPanel_menuPrincipal() {
 		initComponents();
+		
 	}
 
 	private void initComponents() {
