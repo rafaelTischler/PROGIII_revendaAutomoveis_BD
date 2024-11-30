@@ -27,7 +27,7 @@ public class JFrame_automoveis extends JFrame {
 
 	public JFrame_automoveis() {
 		initComponents();
-		this.setContentPane(new JPanel_alterarAutomoveis());
+		this.setContentPane(new JPanel_cadastroAutomoveis());
 	}
 
 	public void initComponents() {
