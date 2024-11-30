@@ -27,12 +27,12 @@ public class JFrame_automoveis extends JFrame {
 
 	public JFrame_automoveis() {
 		initComponents();
-		this.setContentPane(new JPanel_menuPrincipal());
+		this.setContentPane(new JPanel_telaLogin());
 	}
 
 	public void initComponents() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 600);
+		setBounds(100, 100, 1280, 720);
 		setLocationRelativeTo(null);
 		setResizable(false);
 	}
