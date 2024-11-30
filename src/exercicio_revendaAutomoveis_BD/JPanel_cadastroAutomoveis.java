@@ -1,5 +1,7 @@
 package exercicio_revendaAutomoveis_BD;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -96,5 +98,30 @@ public class JPanel_cadastroAutomoveis extends JPanel {
 		this.lbl_homepage.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
 		this.panel.add(this.lbl_homepage, "cell 1 18,alignx center");
+		this.btn_cadVeiculo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cadastrarVeiculo();
+            }
+        });
 	}
+	 private void cadastrarVeiculo() {
+	        String marca = edit_marca.getText();
+	        String modelo = edit_modelo.getText();
+	        String ano = edit_ano.getText();
+	        String cor = edit_cor.getText();
+	        String combustivel = edit_combust.getText();
+	        if (marca.isEmpty() || modelo.isEmpty() || ano.isEmpty() || cor.isEmpty() || combustivel.isEmpty()) {
+	            System.out.println("Todos os campos devem ser preenchidos.");
+	            return;
+	        }
+	        Automovel automovel = new Automovel(marca, modelo, ano, cor, combustivel);
+	        AutomovelDAO dao = new AutomovelDAO();
+	        boolean sucesso = dao.inserir(automovel);
+	        if (sucesso) {
+	            System.out.println("Erro ao cadastrar veículo.");
+	        } else {
+	            System.out.println("Veículo cadastrado com sucesso.");
+	        }
+	    }
 }
