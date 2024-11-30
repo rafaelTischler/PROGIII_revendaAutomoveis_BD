@@ -2,92 +2,71 @@ package exercicio_revendaAutomoveis_BD;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
+import java.awt.Graphics;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
 import net.miginfocom.swing.MigLayout;
 
 public class JPanel_menuPrincipal extends JPanel {
 
-	private static final long serialVersionUID = 1L;
-	private final JPanel panel = new JPanel();
-	private final JLabel txtMenu = new JLabel("Menu Principal");
-	private final JButton btn_cadastrar = new JButton("Cadastrar");
-	private final JButton btn_consultar = new JButton("Consultar");
-	private final JButton btn_alterar = new JButton("Alterar/Excluir");
-	private final JButton btn_sair = new JButton("Sair");
-	private final JLabel lblNewLabel = new JLabel(
-			"<html>\r\n\t<div style='text-align: center;'>\r\n\t\t<p>REVENDA DE</p>\r\n\t\t<h1>AUTOMÓVEIS</h1>\r\n\t<div>\r\n<html>");
+    private static final long serialVersionUID = 1L;
+    private final JPanel panel_logo = new JPanel();
+    private final JPanel panel_usuario = new JPanel();
+    private final JPanel panel_menu = new JPanel();
+    private final JLabel lbl_logoPanel = new JLabel("LOGO");
+    private final JLabel lblNewLabel = new JLabel("Bem-vindo, Usuário");
+    private final JLabel lblNewLabel_1 = new JLabel("MENU");
+    private final JLabel lblNewLabel_2 = new JLabel("CADASTRAR");
+    private final JLabel lblNewLabel_2_1 = new JLabel("CONSULTAR");
+    private final JLabel lblNewLabel_2_1_1 = new JLabel("ALTERAR OU REMOVER");
 
-	public JPanel_menuPrincipal() {
-		initComponents();
-		
-	}
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        ImageIcon background = new ImageIcon(getClass().getResource("/img/bmw_menu.png"));
+        g.drawImage(background.getImage(), 0, 0, getWidth(), getHeight(), this);
+    }
 
-	private void initComponents() {
-		setBounds(100, 100, 800, 600);
-		setLayout(new MigLayout("", "[]", "[]"));
-		setBackground(new Color(129, 178, 154));
-		setBorder(new EmptyBorder(5, 5, 5, 5));
-		setLayout(new MigLayout("", "[][150.00][][grow]", "[][grow][]"));
-		this.panel.setBackground(new Color(61, 64, 91));
-		add(this.panel, "cell 1 1,grow");
-		this.panel.setLayout(new MigLayout("", "[][grow][]", "[][][][][grow][][][][][grow][][]"));
-		this.lblNewLabel.setForeground(Color.WHITE);
-		this.lblNewLabel.setFont(new Font("Segoe UI", Font.BOLD, 20));
-		this.panel.add(this.lblNewLabel, "cell 1 1,alignx left,aligny center");
-		this.txtMenu.setBorder(null);
-		this.txtMenu.setForeground(new Color(255, 255, 255));
-		this.txtMenu.setBackground(new Color(255, 255, 255));
-		this.txtMenu.setFont(new Font("Segoe UI", Font.BOLD, 16));
-		this.panel.add(this.txtMenu, "cell 1 3,alignx center,aligny center");
-		this.btn_cadastrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				abrirTelaCadastro();
-			}
-		});
-		this.btn_cadastrar.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		this.btn_consultar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				abrirTelaConsulta();
-			}
-		});
-		this.btn_consultar.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		this.btn_alterar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				abrirTelaAlterar();
-			}
-		});
-		this.btn_alterar.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		this.panel.add(this.btn_cadastrar, "cell 1 5,growx");
-		this.panel.add(this.btn_consultar, "cell 1 6,growx");
-		this.panel.add(this.btn_alterar, "cell 1 7,growx");
-		this.btn_sair.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		this.btn_sair.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		this.panel.add(this.btn_sair, "cell 1 10,growx");
-	}
+    public JPanel_menuPrincipal() {
+        initComponents();
+    }
 
-	protected void abrirTelaCadastro() {
-		JFrame_automoveis.frame.setContentPane(new JPanel_cadastroAutomoveis());
-		JFrame_automoveis.frame.setVisible(true);
-	}
+    private void initComponents() {
+        // Configuração do JPanel principal
+        setBackground(Color.GRAY);
+        setBounds(100, 100, 1280, 720);
 
-	protected void abrirTelaConsulta() {
-		JFrame_automoveis.frame.setContentPane(new JPanel_consultaAutomoveis());
-		JFrame_automoveis.frame.setVisible(true);
-	}
+        // MigLayout Principal: remove espaçamento entre os painéis, mas mantém os internos
+        setLayout(new MigLayout("insets 0, gap 0", "[grow][grow][grow]", "[25px][50px][grow]"));
 
-	protected void abrirTelaAlterar() {
-		JFrame_automoveis.frame.setContentPane(new JPanel_alterarAutomoveis());
-		JFrame_automoveis.frame.setVisible(true);
-	}
+        // Configuração do panel_logo
+        panel_logo.setBackground(new Color(198, 68, 50));
+        panel_logo.setLayout(new MigLayout("insets 10, gap 10", "[grow][][grow]", "[grow][][grow]"));
+        this.lbl_logoPanel.setForeground(Color.WHITE);
+        lbl_logoPanel.setFont(new Font("Tahoma", Font.BOLD, 30));
+        panel_logo.add(lbl_logoPanel, "cell 1 1");
+        add(panel_logo, "cell 0 0 1 2,grow");
 
+        // Configuração do panel_usuario
+        panel_usuario.setBackground(Color.DARK_GRAY);
+        panel_usuario.setLayout(new MigLayout("insets 10, gap 10", "[][grow]", "[]"));
+        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        lblNewLabel.setForeground(Color.WHITE);
+        panel_usuario.add(lblNewLabel, "cell 0 0");
+        add(panel_usuario, "cell 1 0 2 1,grow");
+
+        // Configuração do panel_menu
+        panel_menu.setBackground(Color.WHITE);
+        panel_menu.setLayout(new MigLayout("insets 10, gap 10", "[grow][][grow][][grow][][grow][][grow]", "[grow][][grow]"));
+        lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 12));
+        panel_menu.add(lblNewLabel_1, "cell 1 1");
+        lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        panel_menu.add(lblNewLabel_2, "cell 3 1");
+        lblNewLabel_2_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        panel_menu.add(lblNewLabel_2_1, "cell 5 1");
+        lblNewLabel_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        panel_menu.add(lblNewLabel_2_1_1, "cell 7 1");
+        add(panel_menu, "cell 1 1 2 1,grow");
+    }
 }
