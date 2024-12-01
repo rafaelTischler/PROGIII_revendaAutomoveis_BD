@@ -88,13 +88,13 @@ public class JPanel_cadastroAutomoveis extends JPanel {
 		this.edit_combust.setColumns(10);
 		
 		this.panel.add(this.edit_combust, "cell 1 14,grow");
-		this.btn_cadVeiculo.setBackground(new Color(184, 88, 71));
+		this.btn_cadVeiculo.setBackground(new Color(170, 60, 45));
 		this.btn_cadVeiculo.setFont(new Font("Tahoma", Font.BOLD, 12));
 		this.btn_cadVeiculo.setForeground(Color.WHITE);
 
 		this.panel.add(this.btn_cadVeiculo, "cell 1 16,grow");
-		this.lbl_homepage.setForeground(new Color(184, 88, 71));
-		this.lbl_homepage.setBackground(new Color(184, 88, 71));
+		this.lbl_homepage.setForeground(new Color(170, 60, 45));
+		this.lbl_homepage.setBackground(new Color(170, 60, 45));
 		this.lbl_homepage.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
 		this.panel.add(this.lbl_homepage, "cell 1 18,alignx center");
