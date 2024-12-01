@@ -7,10 +7,18 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.Cursor;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class JPanel_telaLogin extends JPanel {
 
@@ -70,22 +78,67 @@ public class JPanel_telaLogin extends JPanel {
 		this.btn_entrar.setFont(new Font("Tahoma", Font.BOLD, 12));
 		this.btn_entrar.setForeground(Color.WHITE);
 
-		this.panel.add(this.btn_entrar, "cell 1 11,grow");
-		this.lbl_criar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				abrirTelaCadastroUsuario();
-			}
-		});
-		this.lbl_criar.setForeground(new Color(170, 60, 45));
-		this.lbl_criar.setBackground(new Color(170, 60, 45));
-		this.lbl_criar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		
-		this.panel.add(this.lbl_criar, "cell 1 13,alignx center");
+		this.btn_entrar.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            realizarLogin();
+	        }
+	    });
+
+		panel.add(btn_entrar, "cell 1 11,grow");
+
+        lbl_criar.setFont(new Font("Tahoma", Font.BOLD, 12));
+        lbl_criar.setForeground(new Color(170, 60, 45));
+        lbl_criar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        lbl_criar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                abrirTelaCadastroUsuario();
+            }
+        });
+        panel.add(lbl_criar, "cell 1 12,alignx center");
 	}
 	
-	private void abrirTelaCadastroUsuario() {
-		   
+	private void realizarLogin() {
+	    String login = edit_login.getText();
+	    String senha = edit_senha.getText();
+
+	    if (login.isEmpty() || senha.isEmpty()) {
+	        lblNewLabel.setText("Por favor, preencha ambos os campos de login e senha.");
+	        return; 
+	    }
+
+	    Connection conn = Conexao.getConexao();
+	    if (conn != null) {
+	        try {
+	            String sql = "SELECT * FROM usuario WHERE email = ? AND senha = ?";
+	            PreparedStatement stmt = conn.prepareStatement(sql);
+	            stmt.setString(1, login);
+	            stmt.setString(2, senha);
+	            ResultSet rs = stmt.executeQuery();
+	            if (rs.next()) {         
+	                String nomeUsuario = rs.getString("nome");
+	                lblNewLabel.setText("Bem-vindo, " + nomeUsuario);
+	                JFrame_automoveis.frame.setContentPane(new JPanel_menuPrincipal());
+	                JFrame_automoveis.frame.setVisible(true);
+
+	            } else {
+	                lblNewLabel.setText("Usuário ou senha inválidos.");
+	            }
+
+	            rs.close();
+	            stmt.close();
+	            conn.close();
+	        } catch (SQLException ex) {
+	            ex.printStackTrace();
+	            lblNewLabel.setText("Erro na conexão com o banco de dados.");
+	        }
+	    } else {
+	        lblNewLabel.setText("Erro na conexão com o banco de dados.");
+	    }
+	}
+	
+	private void abrirTelaCadastroUsuario() {	   
 	    JFrame_automoveis.frame.setContentPane(new JPanel_cadastroUsuario()); 
 	    JFrame_automoveis.frame.setVisible(true);
 	}
