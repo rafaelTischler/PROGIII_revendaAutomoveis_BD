@@ -1,80 +1,135 @@
 package exercicio_revendaAutomoveis_BD;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 import net.miginfocom.swing.MigLayout;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.Color;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class JPanel_cadastroUsuario extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel panel = new JPanel();
-	private final JLabel lblNewLabel = new JLabel("Bem-vindo!");
-	private final JLabel lblNewLabel_1 = new JLabel("<html><div style='text-align: left;'>Acesse sua conta e gerencie todo seu inventário de veículos de forma simples e rápida. Caso não possua uma conta, crie uma agora mesmo!</div></html>");
-	private final JLabel lblNewLabel_2 = new JLabel("Login");
-	private final JTextField edit_login = new JTextField();
-	private final JLabel lblNewLabel_3 = new JLabel("Senha");
-	private final JTextField edit_senha = new JTextField();
-	private final JLabel lblNewLabel_4 = new JLabel("Esqueceu sua senha?");
-	private final JButton btn_entrar = new JButton("Entrar");
-	private final JLabel lblNewLabel_5 = new JLabel("Ainda não tem uma conta ? Cadastre-se");
+	private final JLabel lbl_cadastrar = new JLabel("Cadastrar Usuário");
+	private final JLabel lbl_infoCad = new JLabel("<html>\n  <div style='text-align: left;'>\n    Preencha as informações abaixo para cadastrar um novo usuário no sistema. \n    Essas são informações essenciais para criar sua conta e acessar todas as funcionalidades do Ifome. \n    <br>Ao clicar em cadastrar, seu usuário será registrado e poderá realizar pedidos de forma rápida e prática.\n  </div>\n</html>\n\n\n\n\n\n");
+	private final JLabel lbl_marca = new JLabel("Nome");
+	private final JTextField edit_marca = new JTextField();
+	private final JLabel lbl_modelo = new JLabel("E-mail");
+	private final JTextField edit_modelo = new JTextField();
+	private final JButton btn_cadVeiculo = new JButton("Cadastrar");
+	private final JLabel lbl_homepage = new JLabel("Voltar para a tela inicial");
+	private final JLabel lbl_ano = new JLabel("Telefone");
+	private final JTextField edit_ano = new JTextField();
+	private final JTextField edit_cor = new JTextField();
+	private final JLabel lbl_cor = new JLabel("Senha ");
+
+	private final JPanel panel_logo = new JPanel();
+	private final JPanel panel_usuario = new JPanel();
+	private final JPanel panel_menu = new JPanel();
+	private final JLabel lbl_logoPanel = new JLabel("LOGO");
+	private final JLabel lbl_usuario = new JLabel("Bem-vindo, Usuário");
 
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		ImageIcon background = new ImageIcon(getClass().getResource("/img/bmw_login.png"));
+		ImageIcon background = new ImageIcon(getClass().getResource("/img/bmw_cad.png"));
 		g.drawImage(background.getImage(), 0, 0, getWidth(), getHeight(), this);
 	}
 
 	public JPanel_cadastroUsuario() {
-		this.edit_senha.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		this.edit_senha.setColumns(10);
-		this.edit_login.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		this.edit_login.setColumns(10);
+		this.edit_modelo.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		this.edit_modelo.setColumns(10);
+		this.edit_marca.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		this.edit_marca.setColumns(10);
 		initComponents();
 	}
 
 	private void initComponents() {
 		setBackground(new Color(192, 192, 192));
 		setBounds(100, 100, 1280, 720);
-		setLayout(new MigLayout("", "[grow][40%]", "[grow]"));
-		this.panel.setBackground(Color.WHITE);
-		add(this.panel, "cell 1 0, grow");
-		this.panel.setLayout(new MigLayout("", "[grow][50%][grow]", "[grow][][20px][][grow][][30px][][30px][][20px][30px][grow][][grow]"));
-		this.lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
-		this.panel.add(this.lblNewLabel, "cell 1 1,alignx center,aligny center");
-		this.lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		this.panel.add(this.lblNewLabel_1, "cell 1 3,alignx center");
-		this.lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 12));
+		setLayout(new MigLayout("insets 0, gap 0", "[100px][150px][262px][grow]", "[25px][50px][grow]"));
 
-		this.panel.add(this.lblNewLabel_2, "cell 1 5,alignx left");
+		panel_logo.setBackground(new Color(170, 60, 45));
+		panel_logo.setLayout(new MigLayout("insets 10, gap 10", "[grow][][grow]", "[grow][][grow]"));
+		lbl_logoPanel.setForeground(Color.WHITE);
+		lbl_logoPanel.setFont(new Font("Tahoma", Font.BOLD, 30));
+		panel_logo.add(lbl_logoPanel, "cell 1 1");
+		add(panel_logo, "cell 0 0 2 2,grow");
 
-		this.panel.add(this.edit_login, "cell 1 6,grow");
-		this.lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 12));
+		panel_usuario.setBackground(Color.DARK_GRAY);
+		panel_usuario.setLayout(new MigLayout("insets 10, gap 10", "[][][grow]", "[]"));
+		lbl_usuario.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lbl_usuario.setForeground(Color.WHITE);
+		panel_usuario.add(lbl_usuario, "cell 1 0,alignx center");
+		add(panel_usuario, "cell 2 0 2 1,grow");
 
-		this.panel.add(this.lblNewLabel_3, "cell 1 7,alignx left");
+		panel_menu.setBackground(Color.WHITE);
+		panel_menu.setLayout(new MigLayout("insets 10, gap 10", "[grow][][grow][][grow][][grow][][grow]", "[grow][][grow]"));
 
-		this.panel.add(this.edit_senha, "cell 1 8,grow");
-		this.lblNewLabel_4.setForeground(new Color(170, 60, 45));
-		this.lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 11));
+		add(panel_menu, "cell 2 1 2 1,grow");
 
-		this.panel.add(this.lblNewLabel_4, "cell 1 9,alignx right");
-		this.btn_entrar.setBackground(new Color(170, 60, 45));
-		this.btn_entrar.setFont(new Font("Tahoma", Font.BOLD, 12));
-		this.btn_entrar.setForeground(Color.WHITE);
+		panel.setBackground(Color.WHITE);
+		add(panel, "cell 0 2 3 1,grow");
+		panel.setLayout(new MigLayout("", "[grow][40%,grow][grow]", "[grow][][20px][][grow][][35px][][35px][][35px][][35px][][35px][20px][35px][grow][][grow]"));
+		lbl_cadastrar.setFont(new Font("Tahoma", Font.BOLD, 30));
+		panel.add(lbl_cadastrar, "cell 1 1,alignx center,aligny center");
+		lbl_infoCad.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		panel.add(lbl_infoCad, "cell 1 3,alignx center");
+		lbl_marca.setFont(new Font("Tahoma", Font.BOLD, 12));
+		panel.add(lbl_marca, "cell 1 5,alignx left");
+		panel.add(edit_marca, "cell 1 6,grow");
+		lbl_modelo.setFont(new Font("Tahoma", Font.BOLD, 12));
+		panel.add(lbl_modelo, "cell 1 7,alignx left");
+		panel.add(edit_modelo, "cell 1 8,grow");
+		lbl_ano.setFont(new Font("Tahoma", Font.BOLD, 12));
+		panel.add(lbl_ano, "cell 1 9");
+		edit_ano.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		edit_ano.setColumns(10);
+		panel.add(edit_ano, "cell 1 10,grow");
+		lbl_cor.setFont(new Font("Tahoma", Font.BOLD, 12));
+		panel.add(lbl_cor, "cell 1 11");
+		edit_cor.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		edit_cor.setColumns(10);
+		panel.add(edit_cor, "cell 1 12,grow");
+		btn_cadVeiculo.setBackground(new Color(170, 60, 45));
+		btn_cadVeiculo.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btn_cadVeiculo.setForeground(Color.WHITE);
+		panel.add(btn_cadVeiculo, "cell 1 16,grow");
+		this.lbl_homepage.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				abrirTelaMenu();
 
-		this.panel.add(this.btn_entrar, "cell 1 11,grow");
-		this.lblNewLabel_5.setForeground(new Color(170, 60, 45));
-		this.lblNewLabel_5.setBackground(new Color(170, 60, 45));
-		this.lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 11));
+			}
 
-		this.panel.add(this.lblNewLabel_5, "cell 1 13,alignx center");
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lbl_homepage.setForeground(Color.LIGHT_GRAY);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lbl_homepage.setForeground(new Color(170, 60, 45));
+			}
+		});
+		lbl_homepage.setForeground(new Color(170, 60, 45));
+		lbl_homepage.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel.add(lbl_homepage, "cell 1 18,alignx center");
 	}
 
+	protected void abrirTelaMenu() {
+		JFrame_automoveis.frame.setContentPane(new JPanel_menuPrincipal());
+		JFrame_automoveis.frame.setVisible(true);
+	}
+
+	protected void abrirTelaCadastro() {
+		JFrame_automoveis.frame.setContentPane(new JPanel_cadastroAutomoveis());
+		JFrame_automoveis.frame.setVisible(true);
+	}
 }
