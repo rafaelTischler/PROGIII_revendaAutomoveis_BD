@@ -120,25 +120,45 @@ public class JPanel_cadastroUsuario extends JPanel {
 		}
 
 		private void cadastrarUsuario() {
-			String nome = edit_nome.getText().trim();
-			String email = edit_email.getText().trim();
-			String telefone = edit_telefone.getText().trim();
-			String senha = edit_senha.getText().trim();
-			if (nome.isEmpty() || email.isEmpty() || telefone.isEmpty() || senha.isEmpty()) {
-				System.out.println("Preencha todos os campos!");
-				return;
-			}
-			Usuario usuario = new Usuario(nome, email, telefone, senha);
-			UsuarioDAO usuarioDAO = new UsuarioDAO();
-			if (usuarioDAO.inserir(usuario)) {
-				System.out.println("Usuário cadastrado com sucesso!");
-			} else {
-				System.out.println("Erro ao cadastrar usuário.");
-			}
-		}
+		    String nome = edit_nome.getText().trim();
+		    String email = edit_email.getText().trim();
+		    String telefone = edit_telefone.getText().trim();
+		    String senha = edit_senha.getText().trim();
 
+		    if (nome.isEmpty() || email.isEmpty() || telefone.isEmpty() || senha.isEmpty()) {
+		        System.out.println("Preencha todos os campos!");
+		        return;
+		    }
+
+		   
+		    telefone = telefone.replaceAll("[^0-9]", "");
+
+		  
+		    if (telefone.length() > 15) {
+		        System.out.println("Número de telefone muito longo!");
+		        return;
+		    }
+
+		    Usuario usuario = new Usuario(nome, email, telefone, senha);
+		    UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+		    if (usuarioDAO.inserir(usuario)) {
+		        System.out.println("Erro ao cadastrar usuário.");
+		        
+		        abrirTelaLogin();
+		    } else {
+		        System.out.println("Usuário cadastrado com sucesso!");
+		    }
+		}
+		
 		protected void abrirTelaMenu() {
 			JFrame_automoveis.frame.setContentPane(new JPanel_menuPrincipal());
 			JFrame_automoveis.frame.setVisible(true);
+		}
+		
+		private void abrirTelaLogin() {
+		   
+		    JFrame_automoveis.frame.setContentPane(new JPanel_telaLogin()); 
+		    JFrame_automoveis.frame.setVisible(true);
 		}
 }
