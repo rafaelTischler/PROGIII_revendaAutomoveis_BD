@@ -3,19 +3,17 @@ package exercicio_revendaAutomoveis_BD;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
 import net.miginfocom.swing.MigLayout;
-import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.UIManager;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class JPanel_menuPrincipal extends JPanel {
 
@@ -71,20 +69,65 @@ public class JPanel_menuPrincipal extends JPanel {
 		panel_menu.setLayout(new MigLayout("insets 10, gap 10", "[grow][][grow][][grow][][grow][][grow]", "[grow][][grow]"));
 		lbl_menu.setFont(new Font("Tahoma", Font.BOLD, 14));
 		panel_menu.add(lbl_menu, "cell 1 1");
+		this.lbl_cadastrar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				abrirTelaCadastro();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lbl_cadastrar.setForeground(new Color(170, 60, 45));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lbl_cadastrar.setForeground(Color.GRAY);
+			}
+		});
 		this.lbl_cadastrar.setForeground(Color.GRAY);
 		lbl_cadastrar.setFont(new Font("Tahoma", Font.BOLD, 12));
 		panel_menu.add(lbl_cadastrar, "cell 3 1");
+		this.lbl_consultar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				abrirTelaConsulta();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lbl_consultar.setForeground(new Color(170, 60, 45));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lbl_consultar.setForeground(Color.GRAY);
+			}
+		});
 		this.lbl_consultar.setForeground(Color.GRAY);
 		lbl_consultar.setFont(new Font("Tahoma", Font.BOLD, 12));
 		panel_menu.add(lbl_consultar, "cell 5 1");
+		this.lbl_alterarRemover.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				abrirTelaAlterar();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lbl_alterarRemover.setForeground(new Color(170, 60, 45));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lbl_alterarRemover.setForeground(Color.GRAY);
+			}
+		});
 		this.lbl_alterarRemover.setForeground(Color.GRAY);
 		lbl_alterarRemover.setFont(new Font("Tahoma", Font.BOLD, 12));
 		panel_menu.add(lbl_alterarRemover, "cell 7 1");
 		add(panel_menu, "cell 2 1 2 1,grow");
 
-		addMouseListenerToLabel(lbl_cadastrar, this::abrirCadastroAutomoveis);
-		addMouseListenerToLabel(lbl_consultar, this::abrirConsultaAutomoveis);
-		addMouseListenerToLabel(lbl_alterarRemover, this::abrirAlterarAutomoveis);
 		this.lbl_titulo.setForeground(Color.WHITE);
 		this.lbl_titulo.setFont(new Font("Tahoma", Font.BOLD, 30));
 
@@ -93,6 +136,11 @@ public class JPanel_menuPrincipal extends JPanel {
 		this.lbl_texto.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		add(this.lbl_texto, "cell 1 5 2 1");
+		this.btn_comecar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abrirTelaLogin();
+			}
+		});
 		this.btn_comecar.setFocusPainted(false);
 		this.btn_comecar.setBorder(UIManager.getBorder("Button.border"));
 		this.btn_comecar.setBackground(new Color(170, 60, 45));
@@ -111,44 +159,23 @@ public class JPanel_menuPrincipal extends JPanel {
 		lblDireitosAutorais.setForeground(Color.WHITE);
 	}
 
-	private void addMouseListenerToLabel(JLabel label, Runnable action) {
-		label.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				action.run();
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				label.setForeground(new Color(170, 60, 45));
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				label.setForeground(Color.GRAY);
-			}
-		});
+	protected void abrirTelaLogin() {
+		JFrame_automoveis.frame.setContentPane(new JPanel_telaLogin());
+		JFrame_automoveis.frame.setVisible(true);
 	}
 
-	private void abrirCadastroAutomoveis() {
-		JPanel_cadastroAutomoveis cadastroPanel = new JPanel_cadastroAutomoveis();
-		atualizarTela(cadastroPanel);
+	protected void abrirTelaCadastro() {
+		JFrame_automoveis.frame.setContentPane(new JPanel_cadastroAutomoveis());
+		JFrame_automoveis.frame.setVisible(true);
 	}
 
-	private void abrirConsultaAutomoveis() {
-		JOptionPane.showMessageDialog(this, "Funcionalidade de consulta não implementada.");
+	protected void abrirTelaConsulta() {
+		JFrame_automoveis.frame.setContentPane(new JPanel_consultaAutomoveis());
+		JFrame_automoveis.frame.setVisible(true);
 	}
 
-	private void abrirAlterarAutomoveis() {
-		JPanel_alterarAutomoveis alterarPanel = new JPanel_alterarAutomoveis();
-		atualizarTela(alterarPanel);
+	protected void abrirTelaAlterar() {
+		JFrame_automoveis.frame.setContentPane(new JPanel_alterarAutomoveis());
+		JFrame_automoveis.frame.setVisible(true);
 	}
-
-	private void atualizarTela(JPanel novoPainel) {
-		removeAll();
-		add(novoPainel, "grow");
-		revalidate();
-		repaint();
-	}
-
 }

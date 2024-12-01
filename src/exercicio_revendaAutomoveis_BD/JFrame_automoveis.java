@@ -3,8 +3,6 @@ package exercicio_revendaAutomoveis_BD;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 public class JFrame_automoveis extends JFrame {
 

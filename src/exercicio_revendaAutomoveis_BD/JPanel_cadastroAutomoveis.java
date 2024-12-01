@@ -30,6 +30,7 @@ public class JPanel_cadastroAutomoveis extends JPanel {
 	private final JTextField edit_combust = new JTextField();
 	private final JTextField edit_cor = new JTextField();
 	private final JLabel lbl_cor = new JLabel("Cor");
+	private final JPanel panel_logo = new JPanel();
 
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -49,9 +50,13 @@ public class JPanel_cadastroAutomoveis extends JPanel {
 	private void initComponents() {
 		setBackground(new Color(192, 192, 192));
 		setBounds(100, 100, 1280, 720);
-		setLayout(new MigLayout("", "[40%][grow]", "[grow]"));
+		setLayout(new MigLayout("", "[250px][262px][grow]", "[25px][50px][]"));
+
+		panel_logo.setBackground(new Color(170, 60, 45));
+		panel_logo.setLayout(new MigLayout("insets 10, gap 10", "[grow][][grow]", "[grow][][grow]"));
+		add(this.panel_logo, "cell 0 0 1 2,grow");
 		this.panel.setBackground(Color.WHITE);
-		add(this.panel, "cell 0 0,grow");
+		add(this.panel, "cell 0 2 2 1,grow");
 		this.panel.setLayout(new MigLayout("", "[grow][40%,grow][grow]", "[grow][][20px][][grow][][35px][][35px][][35px][][35px][][35px][20px][35px][grow][][grow]"));
 		this.lbl_cadastrar.setFont(new Font("Tahoma", Font.BOLD, 30));
 		this.panel.add(this.lbl_cadastrar, "cell 1 1,alignx center,aligny center");
@@ -68,25 +73,25 @@ public class JPanel_cadastroAutomoveis extends JPanel {
 
 		this.panel.add(this.edit_modelo, "cell 1 8,grow");
 		this.lbl_ano.setFont(new Font("Tahoma", Font.BOLD, 12));
-		
+
 		this.panel.add(this.lbl_ano, "cell 1 9");
 		this.edit_ano.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.edit_ano.setColumns(10);
-		
+
 		this.panel.add(this.edit_ano, "cell 1 10,grow");
 		this.lbl_cor.setFont(new Font("Tahoma", Font.BOLD, 12));
-		
+
 		this.panel.add(this.lbl_cor, "cell 1 11");
 		this.edit_cor.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.edit_cor.setColumns(10);
-		
+
 		this.panel.add(this.edit_cor, "cell 1 12,grow");
 		this.lbl_combust.setFont(new Font("Tahoma", Font.BOLD, 12));
-		
+
 		this.panel.add(this.lbl_combust, "cell 1 13");
 		this.edit_combust.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.edit_combust.setColumns(10);
-		
+
 		this.panel.add(this.edit_combust, "cell 1 14,grow");
 		this.btn_cadVeiculo.setBackground(new Color(170, 60, 45));
 		this.btn_cadVeiculo.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -96,32 +101,33 @@ public class JPanel_cadastroAutomoveis extends JPanel {
 		this.lbl_homepage.setForeground(new Color(170, 60, 45));
 		this.lbl_homepage.setBackground(new Color(170, 60, 45));
 		this.lbl_homepage.setFont(new Font("Tahoma", Font.BOLD, 11));
-		
+
 		this.panel.add(this.lbl_homepage, "cell 1 18,alignx center");
 		this.btn_cadVeiculo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cadastrarVeiculo();
-            }
-        });
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cadastrarVeiculo();
+			}
+		});
 	}
-	 private void cadastrarVeiculo() {
-	        String marca = edit_marca.getText();
-	        String modelo = edit_modelo.getText();
-	        String ano = edit_ano.getText();
-	        String cor = edit_cor.getText();
-	        String combustivel = edit_combust.getText();
-	        if (marca.isEmpty() || modelo.isEmpty() || ano.isEmpty() || cor.isEmpty() || combustivel.isEmpty()) {
-	            System.out.println("Todos os campos devem ser preenchidos.");
-	            return;
-	        }
-	        Automovel automovel = new Automovel(marca, modelo, ano, cor, combustivel);
-	        AutomovelDAO dao = new AutomovelDAO();
-	        boolean sucesso = dao.inserir(automovel);
-	        if (sucesso) {
-	            System.out.println("Erro ao cadastrar veículo.");
-	        } else {
-	            System.out.println("Veículo cadastrado com sucesso.");
-	        }
-	    }
+
+	private void cadastrarVeiculo() {
+		String marca = edit_marca.getText();
+		String modelo = edit_modelo.getText();
+		String ano = edit_ano.getText();
+		String cor = edit_cor.getText();
+		String combustivel = edit_combust.getText();
+		if (marca.isEmpty() || modelo.isEmpty() || ano.isEmpty() || cor.isEmpty() || combustivel.isEmpty()) {
+			System.out.println("Todos os campos devem ser preenchidos.");
+			return;
+		}
+		Automovel automovel = new Automovel(marca, modelo, ano, cor, combustivel);
+		AutomovelDAO dao = new AutomovelDAO();
+		boolean sucesso = dao.inserir(automovel);
+		if (sucesso) {
+			System.out.println("Erro ao cadastrar veículo.");
+		} else {
+			System.out.println("Veículo cadastrado com sucesso.");
+		}
+	}
 }
