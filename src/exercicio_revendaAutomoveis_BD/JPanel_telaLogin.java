@@ -116,15 +116,13 @@ public class JPanel_telaLogin extends JPanel {
 	            stmt.setString(1, login);
 	            stmt.setString(2, senha);
 	            ResultSet rs = stmt.executeQuery();
-	            if (rs.next()) {         
-	                String nomeUsuario = rs.getString("nome");
-	                lblNewLabel.setText("Bem-vindo, " + nomeUsuario);
-	                JFrame_automoveis.frame.setContentPane(new JPanel_menuPrincipal());
-	                JFrame_automoveis.frame.setVisible(true);
-
-	            } else {
-	                lblNewLabel.setText("Usuário ou senha inválidos.");
-	            }
+	            if (rs.next()) {
+                    String nomeUsuario = rs.getString("nome");
+                    lblNewLabel.setText("Bem-vindo, " + nomeUsuario);
+                    abrirMenuPrincipal(nomeUsuario); 
+                } else {
+                    lblNewLabel.setText("Usuário ou senha inválidos.");
+                }
 
 	            rs.close();
 	            stmt.close();
@@ -136,6 +134,13 @@ public class JPanel_telaLogin extends JPanel {
 	    } else {
 	        lblNewLabel.setText("Erro na conexão com o banco de dados.");
 	    }
+	}
+	
+	private void abrirMenuPrincipal(String nomeUsuario) {
+	    JPanel_menuPrincipal menu = new JPanel_menuPrincipal();
+	    JFrame_automoveis.frame.setContentPane(menu);
+	    menu.setUsuario(nomeUsuario); 
+	    JFrame_automoveis.frame.setVisible(true); 
 	}
 	
 	private void abrirTelaCadastroUsuario() {	   

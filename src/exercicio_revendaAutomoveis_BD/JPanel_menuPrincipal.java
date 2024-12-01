@@ -154,23 +154,27 @@ public class JPanel_menuPrincipal extends JPanel {
 				lblDireitosAutorais.setForeground(Color.WHITE);
 	}
 
-	protected void abrirTelaLogin() {
-		JFrame_automoveis.frame.setContentPane(new JPanel_telaLogin());
-		JFrame_automoveis.frame.setVisible(true);
-	}
+	public void setUsuario(String nomeUsuario) {
+        lblNewLabel.setText("Bem-vindo, " + nomeUsuario);
+    }
 
-	protected void abrirTelaCadastro() {
-		JFrame_automoveis.frame.setContentPane(new JPanel_cadastroAutomoveis());
-		JFrame_automoveis.frame.setVisible(true);
-	}
+    protected void abrirTelaLogin() {
+        JFrame_automoveis.frame.setContentPane(new JPanel_telaLogin());
+        JFrame_automoveis.frame.setVisible(true);
+    }
 
-	protected void abrirTelaConsulta() {
-		JFrame_automoveis.frame.setContentPane(new JPanel_consultaAutomoveis());
-		JFrame_automoveis.frame.setVisible(true);
-	}
+    protected void abrirTelaCadastro() {
+        JFrame_automoveis.frame.setContentPane(new JPanel_cadastroAutomoveis());
+        JFrame_automoveis.frame.setVisible(true);
+    }
 
-	protected void abrirTelaAlterar() {
-		JFrame_automoveis.frame.setContentPane(new JPanel_alterarAutomoveis());
-		JFrame_automoveis.frame.setVisible(true);
-	}
+    protected void abrirTelaConsulta() {
+        JFrame_automoveis.frame.setContentPane(new JPanel_consultaAutomoveis());
+        JFrame_automoveis.frame.setVisible(true);
+    }
+
+    protected void abrirTelaAlterar() {
+        JFrame_automoveis.frame.setContentPane(new JPanel_alterarAutomoveis());
+        JFrame_automoveis.frame.setVisible(true);
+    }
 }
