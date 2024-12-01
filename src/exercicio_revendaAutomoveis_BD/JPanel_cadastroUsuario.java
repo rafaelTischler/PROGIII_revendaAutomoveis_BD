@@ -34,6 +34,7 @@ public class JPanel_cadastroUsuario extends JPanel {
 	private final JPanel panel_menu = new JPanel();
 	private final JLabel lbl_logoPanel = new JLabel("LOGO");
 	private final JLabel lbl_usuario = new JLabel("Bem-vindo, Usuário");
+	private final JLabel lbl_homepage_1 = new JLabel("Voltar para a tela inicial");
 
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -98,25 +99,29 @@ public class JPanel_cadastroUsuario extends JPanel {
 		btn_cadastrar.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btn_cadastrar.setForeground(Color.WHITE);
 		panel.add(btn_cadastrar, "cell 1 16,grow");
+		lbl_homepage_1.setForeground(new Color(170, 60, 45));
+		lbl_homepage_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		panel.add(lbl_homepage_1, "cell 1 17,alignx center");
 	}
 		private void configurarEventos() {
 		    btn_cadastrar.addActionListener(e -> cadastrarUsuario());
-		    lbl_homepage.addMouseListener(new MouseAdapter() {
-		        @Override
-		        public void mouseClicked(MouseEvent e) {
-		            abrirTelaMenu();
-		        }
+		    lbl_homepage_1.addMouseListener(new MouseAdapter() {
+	            @Override
+	            public void mouseClicked(MouseEvent e) {
+	                abrirTelaMenu();
+	            }
 
-		        @Override
-		        public void mouseEntered(MouseEvent e) {
-		            lbl_homepage.setForeground(Color.LIGHT_GRAY);
-		        }
+	            @Override
+	            public void mouseEntered(MouseEvent e) {
+	                lbl_homepage_1.setForeground(Color.LIGHT_GRAY);
+	            }
 
-		        @Override
-		        public void mouseExited(MouseEvent e) {
-		            lbl_homepage.setForeground(new Color(170, 60, 45));
-		        }
-		    });
+	            @Override
+	            public void mouseExited(MouseEvent e) {
+	                lbl_homepage_1.setForeground(new Color(170, 60, 45));
+	            }
+	        });
 		}
 
 		private void cadastrarUsuario() {
