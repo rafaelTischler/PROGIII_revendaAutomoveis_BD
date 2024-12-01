@@ -60,17 +60,17 @@ public class JPanel_telaLogin extends JPanel {
 		this.panel.add(this.lblNewLabel_3, "cell 1 7,alignx left");
 
 		this.panel.add(this.edit_senha, "cell 1 8,grow");
-		this.lblNewLabel_4.setForeground(new Color(184, 88, 71));
+		this.lblNewLabel_4.setForeground(new Color(170, 60, 45));
 		this.lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 11));
 
 		this.panel.add(this.lblNewLabel_4, "cell 1 9,alignx right");
-		this.btn_entrar.setBackground(new Color(184, 88, 71));
+		this.btn_entrar.setBackground(new Color(170, 60, 45));
 		this.btn_entrar.setFont(new Font("Tahoma", Font.BOLD, 12));
 		this.btn_entrar.setForeground(Color.WHITE);
 
 		this.panel.add(this.btn_entrar, "cell 1 11,grow");
-		this.lblNewLabel_5.setForeground(new Color(184, 88, 71));
-		this.lblNewLabel_5.setBackground(new Color(184, 88, 71));
+		this.lblNewLabel_5.setForeground(new Color(170, 60, 45));
+		this.lblNewLabel_5.setBackground(new Color(170, 60, 45));
 		this.lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
 		this.panel.add(this.lblNewLabel_5, "cell 1 13,alignx center");

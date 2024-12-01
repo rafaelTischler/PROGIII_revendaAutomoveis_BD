@@ -53,7 +53,7 @@ public class JPanel_menuPrincipal extends JPanel {
 		setBounds(100, 100, 1280, 720);
 		setLayout(new MigLayout("insets 0, gap 0", "[100px][150px][grow][grow]", "[25px][50px][150px][][30px][][30px][30px][grow][]"));
 
-		panel_logo.setBackground(new Color(198, 68, 50));
+		panel_logo.setBackground(new Color(170, 60, 45));
 		panel_logo.setLayout(new MigLayout("insets 10, gap 10", "[grow][][grow]", "[grow][][grow]"));
 		this.lbl_logoPanel.setForeground(Color.WHITE);
 		lbl_logoPanel.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -95,7 +95,7 @@ public class JPanel_menuPrincipal extends JPanel {
 		add(this.lbl_texto, "cell 1 5 2 1");
 		this.btn_comecar.setFocusPainted(false);
 		this.btn_comecar.setBorder(UIManager.getBorder("Button.border"));
-		this.btn_comecar.setBackground(new Color(184, 88, 71));
+		this.btn_comecar.setBackground(new Color(170, 60, 45));
 		this.btn_comecar.setFont(new Font("Tahoma", Font.BOLD, 12));
 		this.btn_comecar.setForeground(Color.WHITE);
 		add(this.btn_comecar, "cell 1 7,grow");
@@ -120,7 +120,7 @@ public class JPanel_menuPrincipal extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				label.setForeground(new Color(192, 68, 50));
+				label.setForeground(new Color(170, 60, 45));
 			}
 
 			@Override
