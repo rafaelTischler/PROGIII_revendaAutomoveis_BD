@@ -30,7 +30,6 @@ public class JPanel_menuPrincipal extends JPanel {
 	private final JLabel lbl_titulo = new JLabel("<html><div style='text-align: left;'>A maneira mais fácil de <br>encontrar e gerenciar <br> seus veículos</div></html>");
 	private final JLabel lbl_texto = new JLabel("<html><div style='text-align: left;'>Aqui você pode cadastrar, consultar e atualizar o seu estoque de<br>carros de forma rápida e prática. Gerencie informações como marca,<br>modelo, cor, ano e tipo de combustível com facilidade. Acesse<br>sua conta e aproveite para manter seu inventário sempre atualizado!</div></html>");
 	private final JLabel lblDireitosAutorais = new JLabel();
-	private final JPanel panel = new JPanel();
 	private final JButton btn_comecar = new JButton("Começar");
 
 	@Override
@@ -67,7 +66,7 @@ public class JPanel_menuPrincipal extends JPanel {
 
 		panel_menu.setBackground(Color.WHITE);
 		panel_menu.setLayout(new MigLayout("insets 10, gap 10", "[grow][][grow][][grow][][grow][][grow]", "[grow][][grow]"));
-		lbl_menu.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lbl_menu.setFont(new Font("Tahoma", Font.BOLD, 12));
 		panel_menu.add(lbl_menu, "cell 1 1");
 		this.lbl_cadastrar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -147,16 +146,12 @@ public class JPanel_menuPrincipal extends JPanel {
 		this.btn_comecar.setFont(new Font("Tahoma", Font.BOLD, 12));
 		this.btn_comecar.setForeground(Color.WHITE);
 		add(this.btn_comecar, "cell 1 7,grow");
-		this.panel.getLayout();
-		this.panel.setBackground(Color.DARK_GRAY);
-
-		add(this.panel, "cell 0 9 4 1,grow");
-		this.panel.add(this.lblDireitosAutorais);
-
-		lblDireitosAutorais.setText("© 2024 Direitos Autorais - Carolini Bassan Carlé e Rafael Müller Tischler | ADS 19 | IFFar - Campus São Vicente do Sul");
-		lblDireitosAutorais.setFont(new Font("Tahoma", Font.PLAIN, 8));
-		lblDireitosAutorais.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDireitosAutorais.setForeground(Color.WHITE);
+				add(this.lblDireitosAutorais, "cell 0 9 4 1,alignx center");
+		
+				lblDireitosAutorais.setText("© 2024 Direitos Autorais - Carolini Bassan Carlé e Rafael Müller Tischler | ADS 19 | IFFar - Campus São Vicente do Sul");
+				lblDireitosAutorais.setFont(new Font("Tahoma", Font.PLAIN, 8));
+				lblDireitosAutorais.setHorizontalAlignment(SwingConstants.CENTER);
+				lblDireitosAutorais.setForeground(Color.WHITE);
 	}
 
 	protected void abrirTelaLogin() {
