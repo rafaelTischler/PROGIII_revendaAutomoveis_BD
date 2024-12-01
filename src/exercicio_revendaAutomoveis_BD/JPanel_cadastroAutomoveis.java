@@ -11,6 +11,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class JPanel_cadastroAutomoveis extends JPanel {
 
@@ -104,6 +106,7 @@ public class JPanel_cadastroAutomoveis extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				abrirTelaConsulta();
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lbl_consultarMenu.setForeground(new Color(170, 60, 45));
@@ -168,6 +171,11 @@ public class JPanel_cadastroAutomoveis extends JPanel {
 		edit_combust.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		edit_combust.setColumns(10);
 		panel.add(edit_combust, "cell 1 14,grow");
+		this.btn_cadVeiculo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cadastrarVeiculo();
+			}
+		});
 		btn_cadVeiculo.setBackground(new Color(170, 60, 45));
 		btn_cadVeiculo.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btn_cadVeiculo.setForeground(Color.WHITE);
@@ -212,5 +220,25 @@ public class JPanel_cadastroAutomoveis extends JPanel {
 	protected void abrirTelaAlterar() {
 		JFrame_automoveis.frame.setContentPane(new JPanel_alterarAutomoveis());
 		JFrame_automoveis.frame.setVisible(true);
+	}
+
+	private void cadastrarVeiculo() {
+		String marca = edit_marca.getText();
+		String modelo = edit_modelo.getText();
+		String ano = edit_ano.getText();
+		String cor = edit_cor.getText();
+		String combustivel = edit_combust.getText();
+		if (marca.isEmpty() || modelo.isEmpty() || ano.isEmpty() || cor.isEmpty() || combustivel.isEmpty()) {
+			System.out.println("Todos os campos devem ser preenchidos.");
+			return;
+		}
+		Automovel automovel = new Automovel(marca, modelo, ano, cor, combustivel);
+		AutomovelDAO dao = new AutomovelDAO();
+		boolean sucesso = dao.inserir(automovel);
+		if (sucesso) {
+			System.out.println("Erro ao cadastrar veículo.");
+		} else {
+			System.out.println("Veículo cadastrado com sucesso.");
+		}
 	}
 }
