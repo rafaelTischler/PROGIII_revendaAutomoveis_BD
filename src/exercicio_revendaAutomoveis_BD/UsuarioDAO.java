@@ -14,7 +14,6 @@ public class UsuarioDAO {
         this.conexao = Conexao.getConexao();
     }
 
-   
     public LinkedList<String> listarNomesUsuarios() {
         String sql = "SELECT nome FROM usuario";
         LinkedList<String> nomes = new LinkedList<>();
