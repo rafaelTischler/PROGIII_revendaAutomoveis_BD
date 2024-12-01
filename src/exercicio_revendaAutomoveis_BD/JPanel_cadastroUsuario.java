@@ -39,7 +39,7 @@ public class JPanel_cadastroUsuario extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		ImageIcon background = new ImageIcon(getClass().getResource("/img/bmw_cad.png"));
+		ImageIcon background = new ImageIcon(getClass().getResource("/img/bmw_login.png"));
 		g.drawImage(background.getImage(), 0, 0, getWidth(), getHeight(), this);
 	}
 

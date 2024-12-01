@@ -9,6 +9,8 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class JPanel_telaLogin extends JPanel {
 
@@ -22,7 +24,7 @@ public class JPanel_telaLogin extends JPanel {
 	private final JTextField edit_senha = new JTextField();
 	private final JLabel lblNewLabel_4 = new JLabel("Esqueceu sua senha?");
 	private final JButton btn_entrar = new JButton("Entrar");
-	private final JLabel lblNewLabel_5 = new JLabel("Ainda não tem uma conta ? Cadastre-se");
+	private final JLabel lbl_criar = new JLabel("Ainda não tem uma conta ? Cadastre-se");
 
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -69,10 +71,22 @@ public class JPanel_telaLogin extends JPanel {
 		this.btn_entrar.setForeground(Color.WHITE);
 
 		this.panel.add(this.btn_entrar, "cell 1 11,grow");
-		this.lblNewLabel_5.setForeground(new Color(170, 60, 45));
-		this.lblNewLabel_5.setBackground(new Color(170, 60, 45));
-		this.lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 11));
+		this.lbl_criar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				abrirTelaCadastroUsuario();
+			}
+		});
+		this.lbl_criar.setForeground(new Color(170, 60, 45));
+		this.lbl_criar.setBackground(new Color(170, 60, 45));
+		this.lbl_criar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
-		this.panel.add(this.lblNewLabel_5, "cell 1 13,alignx center");
+		this.panel.add(this.lbl_criar, "cell 1 13,alignx center");
+	}
+	
+	private void abrirTelaCadastroUsuario() {
+		   
+	    JFrame_automoveis.frame.setContentPane(new JPanel_cadastroUsuario()); 
+	    JFrame_automoveis.frame.setVisible(true);
 	}
 }
