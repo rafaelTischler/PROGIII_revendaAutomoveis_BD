@@ -1,6 +1,7 @@
 package exercicio_revendaAutomoveis_BD;
 
 import java.awt.Graphics;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
@@ -211,16 +212,17 @@ public class JPanel_cadastroAutomoveis extends JPanel {
         String cor = edit_cor.getText();
         String combustivel = edit_combust.getText();
         if (marca.isEmpty() || modelo.isEmpty() || ano.isEmpty() || cor.isEmpty() || combustivel.isEmpty()) {
-            System.out.println("Todos os campos devem ser preenchidos.");
+        	JOptionPane.showMessageDialog(this, "Todos os campos devem ser preenchidos.", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
         Automovel automovel = new Automovel(marca, modelo, ano, cor, combustivel);
         AutomovelDAO dao = new AutomovelDAO();
         boolean sucesso = dao.inserir(automovel);
         if (sucesso) {
-            System.out.println("Erro ao cadastrar veículo.");
+        	   JOptionPane.showMessageDialog(this, "Erro ao cadastrar veículo.", "Erro", JOptionPane.ERROR_MESSAGE);
         } else {
-            System.out.println("Veículo cadastrado com sucesso.");
+        	JOptionPane.showMessageDialog(this, "Veículo cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            abrirTelaMenu();
         }
     }
 	
