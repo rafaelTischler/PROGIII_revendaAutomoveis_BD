@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.Cursor;
-
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
@@ -29,9 +29,10 @@ public class JPanel_telaLogin extends JPanel {
 	private final JLabel lblNewLabel_2 = new JLabel("Login");
 	private final JTextField edit_login = new JTextField();
 	private final JLabel lblNewLabel_3 = new JLabel("Senha");
-	private final JTextField edit_senha = new JTextField();
+	private final JPasswordField edit_senha = new JPasswordField();
 	private final JButton btn_entrar = new JButton("Entrar");
 	private final JLabel lbl_criar = new JLabel("Ainda não tem uma conta ? Cadastre-se");
+	
 
 	public static boolean usuarioLogado = false;
 	public static String nomeUsuario;
@@ -99,7 +100,7 @@ public class JPanel_telaLogin extends JPanel {
 	
 	private void realizarLogin() {
 	    String login = edit_login.getText();
-	    String senha = edit_senha.getText();
+	    String senha = new String(edit_senha.getPassword());
 
 	    if (login.isEmpty() || senha.isEmpty()) {
 	        lblNewLabel.setText("Por favor, preencha ambos os campos de login e senha.");
