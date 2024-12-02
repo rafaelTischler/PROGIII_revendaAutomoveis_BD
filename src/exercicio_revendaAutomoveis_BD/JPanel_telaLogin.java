@@ -103,7 +103,7 @@ public class JPanel_telaLogin extends JPanel {
 	    String senha = new String(edit_senha.getPassword());
 
 	    if (login.isEmpty() || senha.isEmpty()) {
-	        lblNewLabel.setText("Por favor, preencha ambos os campos de login e senha.");
+	        lblNewLabel.setText("<html><div style= text-align:left>Por favor, preencha ambos<br>os campos de<br>login e senha.</div></html>");
 	        return;
 	    }
 
@@ -121,7 +121,7 @@ public class JPanel_telaLogin extends JPanel {
 	                abrirMenuPrincipal(nomeUsuario);  
 
 	            } else {
-	                lblNewLabel.setText("Usuário ou senha inválidos.");
+	                lblNewLabel.setText("<html><div style= text-align:left>Usuário<br>ou senha inválidos.</div></html>");
 	            }
 
 	            rs.close();
