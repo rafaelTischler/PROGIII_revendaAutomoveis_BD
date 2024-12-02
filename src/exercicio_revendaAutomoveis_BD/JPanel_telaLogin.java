@@ -144,16 +144,17 @@ public class JPanel_telaLogin extends JPanel {
 	    JFrame_automoveis.frame.setVisible(true);
 	}
 	
+	
 	private void abrirTelaCadastroUsuario() {	   
 	    JFrame_automoveis.frame.setContentPane(new JPanel_cadastroUsuario()); 
 	    JFrame_automoveis.frame.setVisible(true);
 	}
 	
-	protected void abrirTelaCadastro(String nomeUsuario) {
-        JPanel_cadastroAutomoveis panelCadastro = new JPanel_cadastroAutomoveis();
-        panelCadastro.setUsuario(nomeUsuario); 
-        JFrame_automoveis.frame.setContentPane(panelCadastro);
-        JFrame_automoveis.frame.setVisible(true);
-    }
+	protected void abrirTelaCadastroAutomoveis(String nomeUsuario) {
+	    JPanel_cadastroAutomoveis panelCadastro = new JPanel_cadastroAutomoveis();
+	    panelCadastro.setUsuario(nomeUsuario); 
+	    JFrame_automoveis.frame.setContentPane(panelCadastro);
+	    JFrame_automoveis.frame.setVisible(true);
+	}
 	
 }

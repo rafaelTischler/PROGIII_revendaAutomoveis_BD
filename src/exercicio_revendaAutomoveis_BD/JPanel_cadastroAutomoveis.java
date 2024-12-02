@@ -206,10 +206,8 @@ public class JPanel_cadastroAutomoveis extends JPanel {
 		JFrame_automoveis.frame.setVisible(true);
 	}
 	
-	protected void abrirTelaCadastro(String nomeUsuario) {
-	    JPanel_cadastroAutomoveis panelCadastro = new JPanel_cadastroAutomoveis();
-	    panelCadastro.setUsuario(nomeUsuario);  
-	    JFrame_automoveis.frame.setContentPane(panelCadastro);
+	protected void abrirTelaCadastro() {
+		JFrame_automoveis.frame.setContentPane( new JPanel_cadastroAutomoveis());
 	    JFrame_automoveis.frame.setVisible(true);
 	}
 	
