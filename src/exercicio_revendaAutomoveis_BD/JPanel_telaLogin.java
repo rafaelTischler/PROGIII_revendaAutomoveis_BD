@@ -34,6 +34,8 @@ public class JPanel_telaLogin extends JPanel {
 	private final JButton btn_entrar = new JButton("Entrar");
 	private final JLabel lbl_criar = new JLabel("Ainda não tem uma conta ? Cadastre-se");
 
+	public static boolean usuarioLogado = false;
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -118,6 +120,7 @@ public class JPanel_telaLogin extends JPanel {
 	            ResultSet rs = stmt.executeQuery();
 	            if (rs.next()) {
 	                String nomeUsuario = rs.getString("nome"); 
+	                usuarioLogado = true;
 	                abrirMenuPrincipal(nomeUsuario);  
 
 	            } else {
@@ -138,11 +141,15 @@ public class JPanel_telaLogin extends JPanel {
 
 	
 	private void abrirMenuPrincipal(String nomeUsuario) {
-	    JPanel_menuPrincipal menu = new JPanel_menuPrincipal();
-	    menu.setUsuario(nomeUsuario); 
-	    JFrame_automoveis.frame.setContentPane(menu);
-	    JFrame_automoveis.frame.setVisible(true);
-	}
+        if (usuarioLogado) { 
+            JPanel_menuPrincipal menu = new JPanel_menuPrincipal();
+            menu.setUsuario(nomeUsuario);
+            JFrame_automoveis.frame.setContentPane(menu);
+            JFrame_automoveis.frame.setVisible(true);
+        } else {
+            lblNewLabel.setText("Você precisa fazer login primeiro.");
+        }
+    }
 	
 	
 	private void abrirTelaCadastroUsuario() {	   
