@@ -22,7 +22,7 @@ public class JPanel_menuPrincipal extends JPanel {
 	private final JPanel panel_usuario = new JPanel();
 	private final JPanel panel_menu = new JPanel();
 	private final JLabel lbl_logoPanel = new JLabel("LOGO");
-	private final JLabel lblNewLabel = new JLabel("Bem-vindo, Usuário");
+	private final JLabel lbl_usuario = new JLabel("Bem-vindo, Usuário");
 	private final JLabel lbl_menu = new JLabel("MENU");
 	private final JLabel lbl_cadastrar = new JLabel("CADASTRAR");
 	private final JLabel lbl_consultar = new JLabel("CONSULTAR");
@@ -59,9 +59,9 @@ public class JPanel_menuPrincipal extends JPanel {
 
 		panel_usuario.setBackground(Color.DARK_GRAY);
 		panel_usuario.setLayout(new MigLayout("insets 10, gap 10", "[][][grow]", "[]"));
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		lblNewLabel.setForeground(Color.WHITE);
-		panel_usuario.add(lblNewLabel, "cell 1 0,alignx center");
+		lbl_usuario.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lbl_usuario.setForeground(Color.WHITE);
+		panel_usuario.add(lbl_usuario, "cell 1 0,alignx center");
 		add(panel_usuario, "cell 2 0 2 1,grow");
 
 		panel_menu.setBackground(Color.WHITE);
@@ -155,7 +155,7 @@ public class JPanel_menuPrincipal extends JPanel {
 	}
 
 	public void setUsuario(String nomeUsuario) {
-        lblNewLabel.setText("Bem-vindo, " + nomeUsuario);
+        lbl_usuario.setText("Bem-vindo, " + nomeUsuario);
     }
 
     protected void abrirTelaLogin() {

@@ -35,6 +35,7 @@ public class JPanel_telaLogin extends JPanel {
 	private final JLabel lbl_criar = new JLabel("Ainda não tem uma conta ? Cadastre-se");
 
 	public static boolean usuarioLogado = false;
+	public static String nomeUsuario;
 	
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -119,7 +120,7 @@ public class JPanel_telaLogin extends JPanel {
 	            stmt.setString(2, senha);
 	            ResultSet rs = stmt.executeQuery();
 	            if (rs.next()) {
-	                String nomeUsuario = rs.getString("nome"); 
+	                nomeUsuario = rs.getString("nome"); 
 	                usuarioLogado = true;
 	                abrirMenuPrincipal(nomeUsuario);  
 
