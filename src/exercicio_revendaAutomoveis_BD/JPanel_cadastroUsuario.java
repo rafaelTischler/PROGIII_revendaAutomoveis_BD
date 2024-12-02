@@ -2,6 +2,7 @@ package exercicio_revendaAutomoveis_BD;
 
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
@@ -108,14 +109,14 @@ public class JPanel_cadastroUsuario extends JPanel {
 		String senha = edit_senha.getText().trim();
 
 		if (nome.isEmpty() || email.isEmpty() || telefone.isEmpty() || senha.isEmpty()) {
-			System.out.println("Preencha todos os campos!");
+			JOptionPane.showMessageDialog(this, "Preencha todos os campos!", "Erro", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 
 		telefone = telefone.replaceAll("[^0-9]", "");
 
 		if (telefone.length() > 15) {
-			System.out.println("Número de telefone muito longo!");
+			JOptionPane.showMessageDialog(this, "Número de telefone muito longo!", "Erro", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 
@@ -123,10 +124,10 @@ public class JPanel_cadastroUsuario extends JPanel {
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 
 		if (usuarioDAO.inserir(usuario)) {
-			System.out.println("Erro ao cadastrar usuário.");
+			JOptionPane.showMessageDialog(this, "Erro ao cadastrar usuário.", "Erro", JOptionPane.ERROR_MESSAGE);
 
 		} else {
-			System.out.println("Usuário cadastrado com sucesso!");
+			JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 			abrirTelaLogin();
 		}
 	}
