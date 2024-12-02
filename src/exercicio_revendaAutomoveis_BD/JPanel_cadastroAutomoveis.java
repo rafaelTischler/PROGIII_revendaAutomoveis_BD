@@ -35,12 +35,13 @@ public class JPanel_cadastroAutomoveis extends JPanel {
 	private final JPanel panel_usuario = new JPanel();
 	private final JPanel panel_menu = new JPanel();
 	private final JLabel lbl_logoPanel = new JLabel("LOGO");
-	private final JLabel lbl_usuario = new JLabel("Bem-vindo, Usuário");
+	private final JLabel lblNewLabel = new JLabel("Bem-vindo, Usuário");
 	private final JLabel lbl_menu = new JLabel("MENU");
 	private final JLabel lbl_cadastrarMenu = new JLabel("CADASTRAR");
 	private final JLabel lbl_consultarMenu = new JLabel("CONSULTAR");
 	private final JLabel lbl_alterarRemoverMenu = new JLabel("ALTERAR OU REMOVER");
 
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -49,13 +50,14 @@ public class JPanel_cadastroAutomoveis extends JPanel {
 	}
 
 	public JPanel_cadastroAutomoveis() {
-		this.edit_modelo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		this.edit_modelo.setColumns(10);
-		this.edit_marca.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		this.edit_marca.setColumns(10);
-		initComponents();
+	    this.edit_modelo.setFont(new Font("Tahoma", Font.PLAIN, 12)); 
+	    this.edit_modelo.setColumns(10);
+	    this.edit_marca.setFont(new Font("Tahoma", Font.PLAIN, 12)); 
+	    this.edit_marca.setColumns(10);
+	    initComponents(); 
 	}
-
+	
+	
 	private void initComponents() {
 		setBackground(new Color(192, 192, 192));
 		setBounds(100, 100, 1280, 720);
@@ -70,9 +72,9 @@ public class JPanel_cadastroAutomoveis extends JPanel {
 
 		panel_usuario.setBackground(Color.DARK_GRAY);
 		panel_usuario.setLayout(new MigLayout("insets 10, gap 10", "[][][grow]", "[]"));
-		lbl_usuario.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		lbl_usuario.setForeground(Color.WHITE);
-		panel_usuario.add(lbl_usuario, "cell 1 0,alignx center");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblNewLabel.setForeground(Color.WHITE);
+		panel_usuario.add(lblNewLabel, "cell 1 0,alignx center");
 		add(panel_usuario, "cell 2 0 2 1,grow");
 
 		panel_menu.setBackground(Color.WHITE);
@@ -193,22 +195,29 @@ public class JPanel_cadastroAutomoveis extends JPanel {
 		lbl_homepage.setFont(new Font("Tahoma", Font.BOLD, 11));
 		panel.add(lbl_homepage, "cell 1 18,alignx center");
 	}
+	
+	public void setUsuario(String nomeUsuario) {
+        lblNewLabel.setText("Bem-vindo, " + nomeUsuario);
+    }
+    
 
 	protected void abrirTelaMenu() {
 		JFrame_automoveis.frame.setContentPane(new JPanel_menuPrincipal());
 		JFrame_automoveis.frame.setVisible(true);
 	}
-
-	protected void abrirTelaCadastro() {
-		JFrame_automoveis.frame.setContentPane(new JPanel_cadastroAutomoveis());
-		JFrame_automoveis.frame.setVisible(true);
+	
+	protected void abrirTelaCadastro(String nomeUsuario) {
+	    JPanel_cadastroAutomoveis panelCadastro = new JPanel_cadastroAutomoveis();
+	    panelCadastro.setUsuario(nomeUsuario);  
+	    JFrame_automoveis.frame.setContentPane(panelCadastro);
+	    JFrame_automoveis.frame.setVisible(true);
 	}
-
+	
 	protected void abrirTelaConsulta() {
 		JFrame_automoveis.frame.setContentPane(new JPanel_consultaAutomoveis());
 		JFrame_automoveis.frame.setVisible(true);
 	}
-
+	
 	protected void abrirTelaAlterar() {
 		JFrame_automoveis.frame.setContentPane(new JPanel_alterarAutomoveis());
 		JFrame_automoveis.frame.setVisible(true);
