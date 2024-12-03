@@ -39,11 +39,12 @@ public class JPanel_consultaAutomoveis extends JPanel {
 	private final JLabel lbl_buscaAno = new JLabel("Buscar por ano\r\n");
 	private final JPanel panel_tabela = new JPanel();
 	private final JScrollPane scrollPane = new JScrollPane();
+	private final JTable table = new JTable();
 
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		ImageIcon background = new ImageIcon(getClass().getResource("/img/bmw_cons.png"));
+		ImageIcon background = new ImageIcon(getClass().getResource("/img/bmw_consulta.png"));
 		g.drawImage(background.getImage(), 0, 0, getWidth(), getHeight(), this);
 	}
 
@@ -58,7 +59,7 @@ public class JPanel_consultaAutomoveis extends JPanel {
 		setFocusTraversalKeysEnabled(false);
 		setBackground(Color.GRAY);
 		setBounds(100, 100, 1280, 720);
-		setLayout(new MigLayout("insets 0, gap 0", "[100px][150px][grow][150px:n:150px][30px][150px:n:150px][30px][150px:n:150px][grow][250px]", "[25px][50px][100px][30px][][30px][grow]"));
+		setLayout(new MigLayout("insets 0, gap 0", "[100px][150px][grow][150px:n:150px][30px][150px:n:150px][30px][150px:n:150px][grow][250px]", "[25px][50px][75px:n][30px][100px:n][30px:n][grow]"));
 
 		panel_logo.setBackground(new Color(170, 60, 45));
 		panel_logo.setLayout(new MigLayout("insets 10, gap 10", "[grow][][grow]", "[grow][][grow]"));
@@ -75,7 +76,24 @@ public class JPanel_consultaAutomoveis extends JPanel {
 		add(panel_usuario, "cell 2 0 8 1,grow");
 
 		panel_menu.setBackground(Color.WHITE);
-		panel_menu.setLayout(new MigLayout("insets 10, gap 10", "[grow][][grow][][grow][][grow][][grow]", "[grow][][grow]"));
+		panel_menu.setLayout(
+				new MigLayout("insets 10, gap 10", "[grow][][grow][][grow][][grow][][grow]", "[grow][][grow]"));
+		this.lbl_menu.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				abrirTelaMenu();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lbl_alterarRemover.setForeground(new Color(170, 60, 45));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lbl_alterarRemover.setForeground(Color.GRAY);
+			}
+		});
 		this.lbl_menu.setForeground(Color.GRAY);
 		lbl_menu.setFont(new Font("Tahoma", Font.BOLD, 12));
 		panel_menu.add(lbl_menu, "cell 1 1");
@@ -98,22 +116,6 @@ public class JPanel_consultaAutomoveis extends JPanel {
 		this.lbl_cadastrar.setForeground(Color.GRAY);
 		lbl_cadastrar.setFont(new Font("Tahoma", Font.BOLD, 12));
 		panel_menu.add(lbl_cadastrar, "cell 3 1");
-		this.lbl_consultar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				abrirTelaConsulta();
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lbl_consultar.setForeground(new Color(170, 60, 45));
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lbl_consultar.setForeground(Color.GRAY);
-			}
-		});
 		this.lbl_consultar.setForeground(Color.BLACK);
 		lbl_consultar.setFont(new Font("Tahoma", Font.BOLD, 12));
 		panel_menu.add(lbl_consultar, "cell 5 1");
@@ -138,27 +140,27 @@ public class JPanel_consultaAutomoveis extends JPanel {
 		panel_menu.add(lbl_alterarRemover, "cell 7 1");
 		add(panel_menu, "cell 2 1 8 1,grow");
 		this.panel_buscaMarca.setBackground(Color.WHITE);
-		
+
 		add(this.panel_buscaMarca, "cell 3 3,grow");
 		this.panel_buscaMarca.setLayout(new MigLayout("", "[20px][][20px]", "[][15px][]"));
 		this.lbl_buscaMarca.setFont(new Font("Tahoma", Font.BOLD, 12));
-		
+
 		this.panel_buscaMarca.add(this.lbl_buscaMarca, "cell 1 1,alignx left,aligny center");
 		this.panel_buscaModelo.setBackground(new Color(170, 60, 45));
-		
+
 		add(this.panel_buscaModelo, "cell 5 3,grow");
 		this.panel_buscaModelo.setLayout(new MigLayout("", "[20px][][20px]", "[][][]"));
 		this.lbl_buscaModelo.setForeground(Color.WHITE);
 		this.lbl_buscaModelo.setFont(new Font("Tahoma", Font.BOLD, 12));
-		
+
 		this.panel_buscaModelo.add(this.lbl_buscaModelo, "cell 1 1,alignx left,aligny center");
 		this.panel_buscaAno.setBackground(new Color(170, 60, 45));
-		
+
 		add(this.panel_buscaAno, "cell 7 3,grow");
 		this.panel_buscaAno.setLayout(new MigLayout("", "[20px][][20px]", "[][][]"));
 		this.lbl_buscaAno.setForeground(Color.WHITE);
 		this.lbl_buscaAno.setFont(new Font("Tahoma", Font.BOLD, 12));
-		
+
 		this.panel_buscaAno.add(this.lbl_buscaAno, "cell 1 1,alignx left,aligny center");
 		this.panel_busca.setBackground(Color.WHITE);
 
@@ -173,11 +175,45 @@ public class JPanel_consultaAutomoveis extends JPanel {
 		this.btn_buscar.setForeground(Color.WHITE);
 		this.panel_busca.add(this.btn_buscar, "cell 3 2,grow");
 		this.panel_tabela.setBackground(Color.WHITE);
-		
+
 		add(this.panel_tabela, "cell 0 6 10 1,grow");
-		this.panel_tabela.setLayout(new MigLayout("", "[30px][grow][30px]", "[30px][grow]"));
-		
+		this.panel_tabela.setLayout(new MigLayout("", "[grow][50%][grow]", "[30px][grow]"));
+		this.scrollPane.setForeground(Color.BLACK);
+
 		this.panel_tabela.add(this.scrollPane, "cell 1 1,grow");
+		this.table.setRowSelectionAllowed(false);
+		this.table.setGridColor(Color.WHITE);
+		this.table.setBackground(Color.WHITE);
+
+		//this.table.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		this.table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null},
+			},
+			new String[] {
+				"id", "marca", "modelo", "ano", "cor", "combustivel"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		this.table.getColumnModel().getColumn(0).setResizable(false);
+		this.table.getColumnModel().getColumn(1).setResizable(false);
+		this.table.getColumnModel().getColumn(2).setResizable(false);
+		this.table.getColumnModel().getColumn(3).setResizable(false);
+		this.table.getColumnModel().getColumn(4).setResizable(false);
+		this.table.getColumnModel().getColumn(5).setResizable(false);
+		this.scrollPane.setViewportView(this.table);
+		this.scrollPane.setBackground(Color.WHITE);
+	}
+
+	protected void abrirTelaMenu() {
+		JFrame_automoveis.frame.setContentPane(new JPanel_menuPrincipal());
+		JFrame_automoveis.frame.setVisible(true);
 	}
 
 	protected void abrirTelaCadastro() {
