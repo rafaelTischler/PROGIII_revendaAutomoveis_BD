@@ -80,6 +80,28 @@ public class AutomovelDAO {
 		
 	}
 	
+	public LinkedList<Automovel> consultarAutomoveis(String marca, String modelo, Integer ano) {
+	    String sql = "SELECT * FROM automovel WHERE marca LIKE ? AND (modelo LIKE ? OR ? IS NULL) AND (ano = ? OR ? IS NULL)";
+	    LinkedList<Automovel> lista = new LinkedList<>();
+	    try {
+	        PreparedStatement ps = conexao.prepareStatement(sql);
+	        ps.setString(1, "%" + marca + "%");
+	        ps.setString(2, "%" + modelo + "%");
+	        ps.setObject(3, modelo.isEmpty() ? null : modelo);
+	        ps.setObject(4, ano != null ? ano : null);
+	        ps.setObject(5, ano);
+	        ResultSet rs = ps.executeQuery();
+	        
+	        while(rs.next()) {
+	            Automovel A = new Automovel(rs.getString("marca"), rs.getString("modelo"), rs.getString("ano"), rs.getString("cor"), rs.getString("combustivel"));
+	            lista.add(A);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return lista;
+	}
+	
 	
 	public LinkedList<Automovel> listar(){
 		String sql = "SELECT * FROM automovel";
