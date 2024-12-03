@@ -22,7 +22,7 @@ public class JPanel_menuPrincipal extends JPanel {
 	private final JPanel panel_usuario = new JPanel();
 	private final JPanel panel_menu = new JPanel();
 	private final JLabel lbl_logoPanel = new JLabel("LOGO");
-	private final JLabel lblNewLabel = new JLabel("Bem-vindo, Usuário");
+	private final JLabel lbl_usuario = new JLabel("Bem-vindo, Usuário");
 	private final JLabel lbl_menu = new JLabel("MENU");
 	private final JLabel lbl_cadastrar = new JLabel("CADASTRAR");
 	private final JLabel lbl_consultar = new JLabel("CONSULTAR");
@@ -44,26 +44,6 @@ public class JPanel_menuPrincipal extends JPanel {
 	}
 
 	private void initComponents() {
-<<<<<<< HEAD
-		setBounds(100, 100, 800, 600);
-		setLayout(new MigLayout("", "[]", "[]"));
-		setBackground(new Color(0, 51, 102));
-		setBorder(new EmptyBorder(5, 5, 5, 5));
-		setLayout(new MigLayout("", "[][150.00][][grow]", "[][grow][]"));
-		this.panel.setBackground(new Color(61, 64, 91));
-		add(this.panel, "cell 1 1,grow");
-		this.panel.setLayout(new MigLayout("", "[][grow][]", "[][][][][grow][][][][][grow][][]"));
-		this.lblNewLabel.setForeground(Color.WHITE);
-		this.lblNewLabel.setFont(new Font("Segoe UI", Font.BOLD, 20));
-		this.panel.add(this.lblNewLabel, "cell 1 1,alignx left,aligny center");
-		this.txtMenu.setBorder(null);
-		this.txtMenu.setForeground(new Color(255, 255, 255));
-		this.txtMenu.setBackground(new Color(255, 255, 255));
-		this.txtMenu.setFont(new Font("Segoe UI", Font.BOLD, 16));
-		this.panel.add(this.txtMenu, "cell 1 3,alignx center,aligny center");
-		this.btn_cadastrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-=======
 		setFocusCycleRoot(true);
 		setFocusTraversalKeysEnabled(false);
 		setBackground(Color.GRAY);
@@ -79,9 +59,9 @@ public class JPanel_menuPrincipal extends JPanel {
 
 		panel_usuario.setBackground(Color.DARK_GRAY);
 		panel_usuario.setLayout(new MigLayout("insets 10, gap 10", "[][][grow]", "[]"));
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		lblNewLabel.setForeground(Color.WHITE);
-		panel_usuario.add(lblNewLabel, "cell 1 0,alignx center");
+		lbl_usuario.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lbl_usuario.setForeground(Color.WHITE);
+		panel_usuario.add(lbl_usuario, "cell 1 0,alignx center");
 		add(panel_usuario, "cell 2 0 2 1,grow");
 
 		panel_menu.setBackground(Color.WHITE);
@@ -91,7 +71,6 @@ public class JPanel_menuPrincipal extends JPanel {
 		this.lbl_cadastrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
->>>>>>> b877da3f4287a781b71d4a634a859825c50336ce
 				abrirTelaCadastro();
 			}
 
@@ -175,23 +154,27 @@ public class JPanel_menuPrincipal extends JPanel {
 				lblDireitosAutorais.setForeground(Color.WHITE);
 	}
 
-	protected void abrirTelaLogin() {
-		JFrame_automoveis.frame.setContentPane(new JPanel_telaLogin());
-		JFrame_automoveis.frame.setVisible(true);
-	}
+	public void setUsuario(String nomeUsuario) {
+        lbl_usuario.setText("Bem-vindo, " + nomeUsuario);
+    }
 
-	protected void abrirTelaCadastro() {
-		JFrame_automoveis.frame.setContentPane(new JPanel_cadastroAutomoveis());
-		JFrame_automoveis.frame.setVisible(true);
-	}
+    protected void abrirTelaLogin() {
+        JFrame_automoveis.frame.setContentPane(new JPanel_telaLogin());
+        JFrame_automoveis.frame.setVisible(true);
+    }
 
-	protected void abrirTelaConsulta() {
-		JFrame_automoveis.frame.setContentPane(new JPanel_consultaAutomoveis());
-		JFrame_automoveis.frame.setVisible(true);
-	}
+    protected void abrirTelaCadastro() {
+        JFrame_automoveis.frame.setContentPane(new JPanel_cadastroAutomoveis());
+        JFrame_automoveis.frame.setVisible(true);
+    }
 
-	protected void abrirTelaAlterar() {
-		JFrame_automoveis.frame.setContentPane(new JPanel_alterarAutomoveis());
-		JFrame_automoveis.frame.setVisible(true);
-	}
+    protected void abrirTelaConsulta() {
+        JFrame_automoveis.frame.setContentPane(new JPanel_consultaAutomoveis());
+        JFrame_automoveis.frame.setVisible(true);
+    }
+
+    protected void abrirTelaAlterar() {
+        JFrame_automoveis.frame.setContentPane(new JPanel_alterarAutomoveis());
+        JFrame_automoveis.frame.setVisible(true);
+    }
 }

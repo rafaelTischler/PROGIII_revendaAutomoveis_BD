@@ -14,36 +14,6 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-<<<<<<< HEAD
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.border.EmptyBorder;
-import net.miginfocom.swing.MigLayout;
-import java.awt.Color;
-
-public class JPanel_consultaAutomoveis extends JPanel {
-
-    private static final long serialVersionUID = 1L;
-    private JComboBox<String> comboMarca;
-    private JScrollPane scrollPane;
-    private JTable tabela;
-    private final JComboBox<String> comboModelo = new JComboBox<String>();
-    private final JComboBox<String> comboAno = new JComboBox<String>();
-    private final JLabel lblNewLabel = new JLabel("Consultar Automóveis");
-
-    public JPanel_consultaAutomoveis() {
-    	setBackground(new Color(0, 51, 102));
-        lblNewLabel.setForeground(new Color(255, 255, 255));
-        this.lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        this.comboAno.setModel(new DefaultComboBoxModel<>(new String[] { "Selecione um ano de fabricação:" }));
-        this.comboModelo.setModel(new DefaultComboBoxModel<>(new String[] { "Selecione um modelo:" }));
-        initComponents();
-        preencherComboMarcas();
-    }
-=======
 
 public class JPanel_consultaAutomoveis extends JPanel {
 
@@ -76,7 +46,6 @@ public class JPanel_consultaAutomoveis extends JPanel {
 		ImageIcon background = new ImageIcon(getClass().getResource("/img/bmw_cons.png"));
 		g.drawImage(background.getImage(), 0, 0, getWidth(), getHeight(), this);
 	}
->>>>>>> b877da3f4287a781b71d4a634a859825c50336ce
 
 	public JPanel_consultaAutomoveis() {
 		this.edit_marca.setColumns(10);
@@ -116,20 +85,6 @@ public class JPanel_consultaAutomoveis extends JPanel {
 				abrirTelaCadastro();
 			}
 
-<<<<<<< HEAD
-        this.tabela = new JTable();
-        this.tabela.setModel(new DefaultTableModel(
-                new Object[][] { { null, null, null, null, null, null }, },
-                new String[] { "id", "marca", "modelo", "ano", "cor", "combustivel" }));
-        this.scrollPane.setViewportView(this.tabela);
-        setLayout(new MigLayout("", "[70.00,grow][154.00px][17px][210.00px][18px][181px][grow]", "[grow][25px][37px][226.00px][grow]"));
-        add(comboMarca, "cell 1 2,grow");
-        add(comboModelo, "cell 3 2,grow");
-        add(comboAno, "cell 5 2,alignx left,growy");
-        add(scrollPane, "cell 1 3 5 1,grow");
-        add(lblNewLabel, "cell 3 1,alignx center,growy");
-    }
-=======
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lbl_cadastrar.setForeground(new Color(170, 60, 45));
@@ -239,5 +194,4 @@ public class JPanel_consultaAutomoveis extends JPanel {
 		JFrame_automoveis.frame.setContentPane(new JPanel_alterarAutomoveis());
 		JFrame_automoveis.frame.setVisible(true);
 	}
->>>>>>> b877da3f4287a781b71d4a634a859825c50336ce
 }
