@@ -121,7 +121,7 @@ public class JPanel_telaLogin extends JPanel {
 	                abrirMenuPrincipal(nomeUsuario);  
 
 	            } else {
-	                lblNewLabel.setText("<html><div style= text-align:left>Usuário<br>ou senha inválidos.</div></html>");
+	                lblNewLabel.setText("<html><div style= text-align:left>Usuário ou<br>senha inválidos.</div></html>");
 	            }
 
 	            rs.close();
