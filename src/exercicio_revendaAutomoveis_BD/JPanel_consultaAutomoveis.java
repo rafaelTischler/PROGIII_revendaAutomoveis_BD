@@ -28,7 +28,7 @@ public class JPanel_consultaAutomoveis extends JPanel {
 	private final JLabel lbl_consultar = new JLabel("CONSULTAR");
 	private final JLabel lbl_alterarRemover = new JLabel("ALTERAR OU REMOVER");
 	private final JPanel panel_busca = new JPanel();
-	private final JLabel lbl_marca = new JLabel("Marca");
+	private final JLabel lbl_tipoBusca = new JLabel("Marca");
 	private final JTextField edit_marca = new JTextField();
 	private final JButton btn_buscar = new JButton("Buscar");
 	private final JPanel panel_buscaMarca = new JPanel();
@@ -54,30 +54,27 @@ public class JPanel_consultaAutomoveis extends JPanel {
 		initComponents();
 	}
 
+	@SuppressWarnings("serial")
 	private void initComponents() {
 		setFocusCycleRoot(true);
 		setFocusTraversalKeysEnabled(false);
 		setBackground(Color.GRAY);
 		setBounds(100, 100, 1280, 720);
 		setLayout(new MigLayout("insets 0, gap 0", "[100px][150px][grow][150px:n:150px][30px][150px:n:150px][30px][150px:n:150px][grow][250px]", "[25px][50px][75px:n][30px][100px:n][30px:n][grow]"));
-
 		panel_logo.setBackground(new Color(170, 60, 45));
 		panel_logo.setLayout(new MigLayout("insets 10, gap 10", "[grow][][grow]", "[grow][][grow]"));
 		this.lbl_logoPanel.setForeground(Color.WHITE);
 		lbl_logoPanel.setFont(new Font("Tahoma", Font.BOLD, 30));
 		panel_logo.add(lbl_logoPanel, "cell 1 1");
 		add(panel_logo, "cell 0 0 2 2,grow");
-
 		panel_usuario.setBackground(Color.DARK_GRAY);
 		panel_usuario.setLayout(new MigLayout("insets 10, gap 10", "[][][grow]", "[]"));
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		lblNewLabel.setForeground(Color.WHITE);
 		panel_usuario.add(lblNewLabel, "cell 1 0,alignx center");
 		add(panel_usuario, "cell 2 0 8 1,grow");
-
 		panel_menu.setBackground(Color.WHITE);
-		panel_menu.setLayout(
-				new MigLayout("insets 10, gap 10", "[grow][][grow][][grow][][grow][][grow]", "[grow][][grow]"));
+		panel_menu.setLayout(new MigLayout("insets 10, gap 10", "[grow][][grow][][grow][][grow][][grow]", "[grow][][grow]"));
 		this.lbl_menu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -86,12 +83,12 @@ public class JPanel_consultaAutomoveis extends JPanel {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lbl_alterarRemover.setForeground(new Color(170, 60, 45));
+				lbl_menu.setForeground(new Color(170, 60, 45));
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lbl_alterarRemover.setForeground(Color.GRAY);
+				lbl_menu.setForeground(Color.GRAY);
 			}
 		});
 		this.lbl_menu.setForeground(Color.GRAY);
@@ -140,63 +137,61 @@ public class JPanel_consultaAutomoveis extends JPanel {
 		panel_menu.add(lbl_alterarRemover, "cell 7 1");
 		add(panel_menu, "cell 2 1 8 1,grow");
 		this.panel_buscaMarca.setBackground(Color.WHITE);
-
 		add(this.panel_buscaMarca, "cell 3 3,grow");
 		this.panel_buscaMarca.setLayout(new MigLayout("", "[20px][][20px]", "[][15px][]"));
 		this.lbl_buscaMarca.setFont(new Font("Tahoma", Font.BOLD, 12));
-
 		this.panel_buscaMarca.add(this.lbl_buscaMarca, "cell 1 1,alignx left,aligny center");
 		this.panel_buscaModelo.setBackground(new Color(170, 60, 45));
-
 		add(this.panel_buscaModelo, "cell 5 3,grow");
 		this.panel_buscaModelo.setLayout(new MigLayout("", "[20px][][20px]", "[][][]"));
 		this.lbl_buscaModelo.setForeground(Color.WHITE);
 		this.lbl_buscaModelo.setFont(new Font("Tahoma", Font.BOLD, 12));
-
 		this.panel_buscaModelo.add(this.lbl_buscaModelo, "cell 1 1,alignx left,aligny center");
 		this.panel_buscaAno.setBackground(new Color(170, 60, 45));
-
 		add(this.panel_buscaAno, "cell 7 3,grow");
 		this.panel_buscaAno.setLayout(new MigLayout("", "[20px][][20px]", "[][][]"));
 		this.lbl_buscaAno.setForeground(Color.WHITE);
 		this.lbl_buscaAno.setFont(new Font("Tahoma", Font.BOLD, 12));
-
 		this.panel_buscaAno.add(this.lbl_buscaAno, "cell 1 1,alignx left,aligny center");
 		this.panel_busca.setBackground(Color.WHITE);
-
 		add(this.panel_busca, "cell 3 4 5 1,grow");
-		this.panel_busca.setLayout(new MigLayout("", "[30px][330px][30px:30px][150px][30px]", "[20px][][30px][20px]"));
-		this.lbl_marca.setFont(new Font("Tahoma", Font.BOLD, 12));
-		this.panel_busca.add(this.lbl_marca, "cell 1 1");
-
+		this.panel_busca.setLayout(new MigLayout("", "[50px][330px][30px:30px][150px][50px]", "[20px][][30px][20px]"));
+		this.lbl_tipoBusca.setFont(new Font("Tahoma", Font.BOLD, 12));
+		this.panel_busca.add(this.lbl_tipoBusca, "cell 1 1");
 		this.panel_busca.add(this.edit_marca, "cell 1 2,grow");
 		this.btn_buscar.setBackground(new Color(170, 60, 45));
 		this.btn_buscar.setFont(new Font("Tahoma", Font.BOLD, 12));
 		this.btn_buscar.setForeground(Color.WHITE);
 		this.panel_busca.add(this.btn_buscar, "cell 3 2,grow");
 		this.panel_tabela.setBackground(Color.WHITE);
-
 		add(this.panel_tabela, "cell 0 6 10 1,grow");
-		this.panel_tabela.setLayout(new MigLayout("", "[grow][50%][grow]", "[30px][grow]"));
+		this.panel_tabela.setLayout(new MigLayout("", "[grow][70%][grow]", "[30px][grow]"));
 		this.scrollPane.setForeground(Color.BLACK);
-
 		this.panel_tabela.add(this.scrollPane, "cell 1 1,grow");
+		this.table.setShowVerticalLines(false);
+		this.table.setShowHorizontalLines(false);
+		this.table.setShowGrid(false);
 		this.table.setRowSelectionAllowed(false);
-		this.table.setGridColor(Color.WHITE);
+		this.table.setColumnSelectionAllowed(false);
 		this.table.setBackground(Color.WHITE);
+		this.table.setForeground(Color.BLACK);
+		this.table.setGridColor(Color.WHITE);
+		this.table.setSelectionBackground(Color.LIGHT_GRAY);
+		this.table.setSelectionForeground(Color.BLACK);
+		this.table.setShowGrid(false);
+		this.table.setIntercellSpacing(new java.awt.Dimension(0, 0));
+		this.table.getTableHeader().setBorder(null);
+		this.table.setRowHeight(30);
+		this.table.getTableHeader().setBackground(new Color(170, 60, 45));
+		this.table.getTableHeader().setForeground(Color.WHITE);
+		this.table.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 12));
+		this.table.setFillsViewportHeight(true);
+		this.table.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		this.table.getTableHeader().setPreferredSize(new java.awt.Dimension(table.getTableHeader().getWidth(), 30));
+		this.table.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null }, { null, null, null, null, null, "" }, },
+																																new String[] { "id", "marca", "modelo", "ano", "cor", "combustivel" }) {
+			boolean[] columnEditables = new boolean[] { false, false, false, false, false, false };
 
-		//this.table.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		this.table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null},
-			},
-			new String[] {
-				"id", "marca", "modelo", "ano", "cor", "combustivel"
-			}
-		) {
-			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false, false
-			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
@@ -207,8 +202,14 @@ public class JPanel_consultaAutomoveis extends JPanel {
 		this.table.getColumnModel().getColumn(3).setResizable(false);
 		this.table.getColumnModel().getColumn(4).setResizable(false);
 		this.table.getColumnModel().getColumn(5).setResizable(false);
+		this.table.getTableHeader().setReorderingAllowed(false);
 		this.scrollPane.setViewportView(this.table);
 		this.scrollPane.setBackground(Color.WHITE);
+		this.scrollPane.setBorder(null);
+		this.scrollPane.getViewport().setBorder(null);
+		this.scrollPane.getViewport().setBackground(Color.WHITE);
+		this.scrollPane.getViewport().setBackground(Color.WHITE);
+		addPanelListeners();
 	}
 
 	protected void abrirTelaMenu() {
@@ -230,4 +231,47 @@ public class JPanel_consultaAutomoveis extends JPanel {
 		JFrame_automoveis.frame.setContentPane(new JPanel_alterarAutomoveis());
 		JFrame_automoveis.frame.setVisible(true);
 	}
+
+	private void addPanelListeners() {
+		panel_buscaMarca.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				selecionarPainel(panel_buscaMarca, lbl_buscaMarca);
+				desmarcarPainel(panel_buscaModelo, lbl_buscaModelo);
+				desmarcarPainel(panel_buscaAno, lbl_buscaAno);
+				lbl_tipoBusca.setText("Marca");
+			}
+		});
+
+		panel_buscaModelo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				selecionarPainel(panel_buscaModelo, lbl_buscaModelo);
+				desmarcarPainel(panel_buscaMarca, lbl_buscaMarca);
+				desmarcarPainel(panel_buscaAno, lbl_buscaAno);
+				lbl_tipoBusca.setText("Modelo");
+			}
+		});
+
+		panel_buscaAno.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				selecionarPainel(panel_buscaAno, lbl_buscaAno);
+				desmarcarPainel(panel_buscaMarca, lbl_buscaMarca);
+				desmarcarPainel(panel_buscaModelo, lbl_buscaModelo);
+				lbl_tipoBusca.setText("Ano");
+			}
+		});
+	}
+
+	private void selecionarPainel(JPanel painel, JLabel label) {
+		painel.setBackground(Color.WHITE);
+		label.setForeground(Color.BLACK);
+	}
+
+	private void desmarcarPainel(JPanel painel, JLabel label) {
+		painel.setBackground(new Color(170, 60, 45));
+		label.setForeground(Color.WHITE);
+	}
+
 }
