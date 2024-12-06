@@ -3,21 +3,29 @@ package exercicio_revendaAutomoveis_BD;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.LinkedList;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class JPanel_consultaAutomoveis extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private String tipoBuscaAtual = "Marca";
 	private final JPanel panel_logo = new JPanel();
 	private final JPanel panel_usuario = new JPanel();
 	private final JPanel panel_menu = new JPanel();
@@ -29,7 +37,6 @@ public class JPanel_consultaAutomoveis extends JPanel {
 	private final JLabel lbl_alterarRemover = new JLabel("ALTERAR OU REMOVER");
 	private final JPanel panel_busca = new JPanel();
 	private final JLabel lbl_tipoBusca = new JLabel("Marca");
-	private final JTextField edit_marca = new JTextField();
 	private final JButton btn_buscar = new JButton("Buscar");
 	private final JPanel panel_buscaMarca = new JPanel();
 	private final JLabel lbl_buscaMarca = new JLabel("Buscar por marca");
@@ -40,6 +47,7 @@ public class JPanel_consultaAutomoveis extends JPanel {
 	private final JPanel panel_tabela = new JPanel();
 	private final JScrollPane scrollPane = new JScrollPane();
 	private final JTable table = new JTable();
+	private final JComboBox<String> combo_busca = new JComboBox<String>();
 
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -49,9 +57,10 @@ public class JPanel_consultaAutomoveis extends JPanel {
 	}
 
 	public JPanel_consultaAutomoveis() {
-		this.edit_marca.setColumns(10);
-		this.edit_marca.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		this.lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		this.combo_busca.setModel(new DefaultComboBoxModel<>(new String[] { "Selecione uma marca:" }));
 		initComponents();
+		preencherComboBusca();
 	}
 
 	@SuppressWarnings("serial")
@@ -155,10 +164,16 @@ public class JPanel_consultaAutomoveis extends JPanel {
 		this.panel_buscaAno.add(this.lbl_buscaAno, "cell 1 1,alignx left,aligny center");
 		this.panel_busca.setBackground(Color.WHITE);
 		add(this.panel_busca, "cell 3 4 5 1,grow");
-		this.panel_busca.setLayout(new MigLayout("", "[50px][330px][30px:30px][150px][50px]", "[20px][][30px][20px]"));
+		this.panel_busca.setLayout(new MigLayout("", "[50px][330px,grow][30px:30px][150px][50px]", "[20px][][30px][20px]"));
 		this.lbl_tipoBusca.setFont(new Font("Tahoma", Font.BOLD, 12));
 		this.panel_busca.add(this.lbl_tipoBusca, "cell 1 1");
-		this.panel_busca.add(this.edit_marca, "cell 1 2,grow");
+
+		this.panel_busca.add(this.combo_busca, "cell 1 2,growx");
+		this.btn_buscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				acaoCombo();
+			}
+		});
 		this.btn_buscar.setBackground(new Color(170, 60, 45));
 		this.btn_buscar.setFont(new Font("Tahoma", Font.BOLD, 12));
 		this.btn_buscar.setForeground(Color.WHITE);
@@ -240,6 +255,8 @@ public class JPanel_consultaAutomoveis extends JPanel {
 				desmarcarPainel(panel_buscaModelo, lbl_buscaModelo);
 				desmarcarPainel(panel_buscaAno, lbl_buscaAno);
 				lbl_tipoBusca.setText("Marca");
+				tipoBuscaAtual = "Marca";
+				preencherComboBusca();
 			}
 		});
 
@@ -250,6 +267,8 @@ public class JPanel_consultaAutomoveis extends JPanel {
 				desmarcarPainel(panel_buscaMarca, lbl_buscaMarca);
 				desmarcarPainel(panel_buscaAno, lbl_buscaAno);
 				lbl_tipoBusca.setText("Modelo");
+				tipoBuscaAtual = "Modelo";
+				preencherComboBusca();
 			}
 		});
 
@@ -260,6 +279,8 @@ public class JPanel_consultaAutomoveis extends JPanel {
 				desmarcarPainel(panel_buscaMarca, lbl_buscaMarca);
 				desmarcarPainel(panel_buscaModelo, lbl_buscaModelo);
 				lbl_tipoBusca.setText("Ano");
+				tipoBuscaAtual = "Ano";
+				preencherComboBusca();
 			}
 		});
 	}
@@ -272,6 +293,47 @@ public class JPanel_consultaAutomoveis extends JPanel {
 	private void desmarcarPainel(JPanel painel, JLabel label) {
 		painel.setBackground(new Color(170, 60, 45));
 		label.setForeground(Color.WHITE);
+	}
+
+	/*
+	 * private void preencherComboBusca() { AutomovelDAO dao = new AutomovelDAO();
+	 * LinkedList<String> marcas = dao.listarMarcas(); for (String marca : marcas) {
+	 * combo_busca.addItem(marca); } }
+	 */
+
+	private void preencherComboBusca() {
+		AutomovelDAO dao = new AutomovelDAO();
+		combo_busca.removeAllItems();
+		combo_busca.addItem("Selecione um(a) " + tipoBuscaAtual.toLowerCase() + ":");
+
+		LinkedList<String> itens;
+		if (tipoBuscaAtual.equals("Marca")) {
+			itens = dao.listarMarcas();
+		} else if (tipoBuscaAtual.equals("Modelo")) {
+			itens = dao.listarModelos();
+		} else {
+			itens = dao.listarAnos();
+		}
+		for (String item : itens) {
+			combo_busca.addItem(item);
+		}
+	}
+
+	private void acaoCombo() {
+		AutomovelDAO dao = new AutomovelDAO();
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		LinkedList<Automovel> automoveis = dao.listar();
+		model.setRowCount(0);
+
+		String selecionado = combo_busca.getSelectedItem().toString();
+		if (!selecionado.startsWith("Selecione")) {
+			for (Automovel auto : automoveis) {
+				if ((tipoBuscaAtual.equals("Marca") && auto.getMarca().equals(selecionado)) || (tipoBuscaAtual.equals("Modelo") && auto.getModelo().equals(selecionado)) || (tipoBuscaAtual.equals(
+																																		"Ano") && String.valueOf(auto.getAno()).equals(selecionado))) {
+					model.addRow(new String[] { String.valueOf(auto.getId()), auto.getMarca(), auto.getModelo(), String.valueOf(auto.getAno()), auto.getCor(), auto.getCombustivel() });
+				}
+			}
+		}
 	}
 
 }
