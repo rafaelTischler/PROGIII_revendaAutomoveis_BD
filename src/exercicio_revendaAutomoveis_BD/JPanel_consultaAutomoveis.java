@@ -12,8 +12,6 @@ import net.miginfocom.swing.MigLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.LinkedList;
-
-import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -294,12 +292,6 @@ public class JPanel_consultaAutomoveis extends JPanel {
 		painel.setBackground(new Color(170, 60, 45));
 		label.setForeground(Color.WHITE);
 	}
-
-	/*
-	 * private void preencherComboBusca() { AutomovelDAO dao = new AutomovelDAO();
-	 * LinkedList<String> marcas = dao.listarMarcas(); for (String marca : marcas) {
-	 * combo_busca.addItem(marca); } }
-	 */
 
 	private void preencherComboBusca() {
 		AutomovelDAO dao = new AutomovelDAO();
