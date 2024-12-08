@@ -39,7 +39,7 @@ public class JPanel_alterarAutomoveis extends JPanel {
 	private final JPanel panel_usuario = new JPanel();
 	private final JPanel panel_menu = new JPanel();
 	private final JLabel lbl_logoPanel = new JLabel("Cars.");
-	private final JLabel lbl_usuario = new JLabel("Bem-vindo, Usuário");
+	private final JLabel lbl_usuario = new JLabel("Bem-vindo, " + UsuarioLogado.getNomeUsuario());
 	private final JLabel lbl_menu = new JLabel("MENU");
 	private final JLabel lbl_cadastrarMenu = new JLabel("CADASTRAR");
 	private final JLabel lbl_consultarMenu = new JLabel("CONSULTAR");
@@ -70,7 +70,8 @@ public class JPanel_alterarAutomoveis extends JPanel {
 	private void initComponents() {
 		setBackground(new Color(192, 192, 192));
 		setBounds(100, 100, 1280, 720);
-		setLayout(new MigLayout("insets 0, gap 0", "[100px:n][::150px,grow][262px,grow][100px:n][40%]", "[25px][50px][45px:n][][30px:n][][30px:n][35px:n][grow]"));
+		setLayout(new MigLayout("insets 0, gap 0", "[100px:n][::150px,grow][262px,grow][100px:n][40%]",
+				"[25px][50px][45px:n][][30px:n][][30px:n][35px:n][grow]"));
 
 		panel_logo.setBackground(new Color(170, 60, 45));
 		panel_logo.setLayout(new MigLayout("insets 10, gap 10", "[grow][][grow]", "[grow][][grow]"));

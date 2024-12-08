@@ -28,7 +28,7 @@ public class JPanel_consultaAutomoveis extends JPanel {
 	private final JPanel panel_usuario = new JPanel();
 	private final JPanel panel_menu = new JPanel();
 	private final JLabel lbl_logoPanel = new JLabel("Cars.");
-	private final JLabel lblNewLabel = new JLabel("Bem-vindo, Usuário");
+	private final JLabel lbl_usuario = new JLabel("Bem-vindo, " + UsuarioLogado.getNomeUsuario());
 	private final JLabel lbl_menu = new JLabel("MENU");
 	private final JLabel lbl_cadastrar = new JLabel("CADASTRAR");
 	private final JLabel lbl_consultar = new JLabel("CONSULTAR");
@@ -55,7 +55,7 @@ public class JPanel_consultaAutomoveis extends JPanel {
 	}
 
 	public JPanel_consultaAutomoveis() {
-		this.lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		this.lbl_usuario.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		this.combo_busca.setModel(new DefaultComboBoxModel<>(new String[] { "Selecione uma marca:" }));
 		initComponents();
 		preencherComboBusca();
@@ -67,7 +67,9 @@ public class JPanel_consultaAutomoveis extends JPanel {
 		setFocusTraversalKeysEnabled(false);
 		setBackground(Color.GRAY);
 		setBounds(100, 100, 1280, 720);
-		setLayout(new MigLayout("insets 0, gap 0", "[100px][150px][grow][150px:n:150px][30px][150px:n:150px][30px][150px:n:150px][grow][250px]", "[25px][50px][75px:n][30px][100px:n][75px:n,baseline][grow]"));
+		setLayout(new MigLayout("insets 0, gap 0",
+				"[100px][150px][grow][150px:n:150px][30px][150px:n:150px][30px][150px:n:150px][grow][250px]",
+				"[25px][50px][75px:n][30px][100px:n][75px:n,baseline][grow]"));
 		panel_logo.setBackground(new Color(170, 60, 45));
 		panel_logo.setLayout(new MigLayout("insets 10, gap 10", "[grow][][grow]", "[grow][][grow]"));
 		this.lbl_logoPanel.setForeground(Color.WHITE);
@@ -76,12 +78,13 @@ public class JPanel_consultaAutomoveis extends JPanel {
 		add(panel_logo, "cell 0 0 2 2,grow");
 		panel_usuario.setBackground(Color.DARK_GRAY);
 		panel_usuario.setLayout(new MigLayout("insets 10, gap 10", "[][][grow]", "[]"));
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		lblNewLabel.setForeground(Color.WHITE);
-		panel_usuario.add(lblNewLabel, "cell 1 0,alignx center");
+		lbl_usuario.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lbl_usuario.setForeground(Color.WHITE);
+		panel_usuario.add(lbl_usuario, "cell 1 0,alignx center");
 		add(panel_usuario, "cell 2 0 8 1,grow");
 		panel_menu.setBackground(Color.WHITE);
-		panel_menu.setLayout(new MigLayout("insets 10, gap 10", "[grow][][grow][][grow][][grow][][grow]", "[grow][][grow]"));
+		panel_menu.setLayout(
+				new MigLayout("insets 10, gap 10", "[grow][][grow][][grow][][grow][][grow]", "[grow][][grow]"));
 		this.lbl_menu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -162,7 +165,8 @@ public class JPanel_consultaAutomoveis extends JPanel {
 		this.panel_buscaAno.add(this.lbl_buscaAno, "cell 1 1,alignx left,aligny center");
 		this.panel_busca.setBackground(Color.WHITE);
 		add(this.panel_busca, "cell 3 4 5 1,grow");
-		this.panel_busca.setLayout(new MigLayout("", "[50px][330px,grow][30px:30px][150px][50px]", "[20px][][30px][20px]"));
+		this.panel_busca
+				.setLayout(new MigLayout("", "[50px][330px,grow][30px:30px][150px][50px]", "[20px][][30px][20px]"));
 		this.lbl_tipoBusca.setFont(new Font("Tahoma", Font.BOLD, 12));
 		this.panel_busca.add(this.lbl_tipoBusca, "cell 1 1");
 
@@ -201,8 +205,9 @@ public class JPanel_consultaAutomoveis extends JPanel {
 		this.table.setFillsViewportHeight(true);
 		this.table.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		this.table.getTableHeader().setPreferredSize(new java.awt.Dimension(table.getTableHeader().getWidth(), 30));
-		this.table.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null, null }, { null, null, null, null, null, "" }, },
-																																new String[] { "id", "marca", "modelo", "ano", "cor", "combustivel" }) {
+		this.table.setModel(new DefaultTableModel(
+				new Object[][] { { null, null, null, null, null, null }, { null, null, null, null, null, "" }, },
+				new String[] { "id", "marca", "modelo", "ano", "cor", "combustivel" }) {
 			boolean[] columnEditables = new boolean[] { false, false, false, false, false, false };
 
 			public boolean isCellEditable(int row, int column) {
@@ -320,9 +325,11 @@ public class JPanel_consultaAutomoveis extends JPanel {
 		String selecionado = combo_busca.getSelectedItem().toString();
 		if (!selecionado.startsWith("Selecione")) {
 			for (Automovel auto : automoveis) {
-				if ((tipoBuscaAtual.equals("Marca") && auto.getMarca().equals(selecionado)) || (tipoBuscaAtual.equals("Modelo") && auto.getModelo().equals(selecionado)) || (tipoBuscaAtual.equals(
-																																		"Ano") && String.valueOf(auto.getAno()).equals(selecionado))) {
-					model.addRow(new String[] { String.valueOf(auto.getId()), auto.getMarca(), auto.getModelo(), String.valueOf(auto.getAno()), auto.getCor(), auto.getCombustivel() });
+				if ((tipoBuscaAtual.equals("Marca") && auto.getMarca().equals(selecionado))
+						|| (tipoBuscaAtual.equals("Modelo") && auto.getModelo().equals(selecionado))
+						|| (tipoBuscaAtual.equals("Ano") && String.valueOf(auto.getAno()).equals(selecionado))) {
+					model.addRow(new String[] { String.valueOf(auto.getId()), auto.getMarca(), auto.getModelo(),
+							String.valueOf(auto.getAno()), auto.getCor(), auto.getCombustivel() });
 				}
 			}
 		}

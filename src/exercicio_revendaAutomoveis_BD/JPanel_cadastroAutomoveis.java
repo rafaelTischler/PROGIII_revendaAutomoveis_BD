@@ -20,7 +20,8 @@ public class JPanel_cadastroAutomoveis extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private final JPanel panel = new JPanel();
 	private final JLabel lbl_cadastrar = new JLabel("Cadastrar um veículo");
-	private final JLabel lbl_infoCad = new JLabel("<html><div style='text-align: left;'>Preencha as informações abaixo para cadastrar um veículo no estoque. Essas são informações básicas para o controle do seu inventário veicular. <br>Ao clicar em cadastrar, o veículo estará disponível para consultas e gerenciamento em seu sistema.</div></html>");
+	private final JLabel lbl_infoCad = new JLabel(
+			"<html><div style='text-align: left;'>Preencha as informações abaixo para cadastrar um veículo no estoque. Essas são informações básicas para o controle do seu inventário veicular. <br>Ao clicar em cadastrar, o veículo estará disponível para consultas e gerenciamento em seu sistema.</div></html>");
 	private final JLabel lbl_marca = new JLabel("Marca");
 	private final JTextField edit_marca = new JTextField();
 	private final JLabel lbl_modelo = new JLabel("Modelo");
@@ -33,17 +34,16 @@ public class JPanel_cadastroAutomoveis extends JPanel {
 	private final JTextField edit_combust = new JTextField();
 	private final JTextField edit_cor = new JTextField();
 	private final JLabel lbl_cor = new JLabel("Cor");
-
 	private final JPanel panel_logo = new JPanel();
 	private final JPanel panel_usuario = new JPanel();
 	private final JPanel panel_menu = new JPanel();
 	private final JLabel lbl_logoPanel = new JLabel("Cars.");
-	private final JLabel lbl_usuario = new JLabel("Bem-vindo, Usuário");
+	private final JLabel lbl_usuario = new JLabel("Bem-vindo, " + UsuarioLogado.getNomeUsuario());
 	private final JLabel lbl_menu = new JLabel("MENU");
 	private final JLabel lbl_cadastrarMenu = new JLabel("CADASTRAR");
 	private final JLabel lbl_consultarMenu = new JLabel("CONSULTAR");
 	private final JLabel lbl_alterarRemoverMenu = new JLabel("ALTERAR OU REMOVER");
-	
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -52,14 +52,13 @@ public class JPanel_cadastroAutomoveis extends JPanel {
 	}
 
 	public JPanel_cadastroAutomoveis() {
-	    this.edit_modelo.setFont(new Font("Tahoma", Font.PLAIN, 12)); 
-	    this.edit_modelo.setColumns(10);
-	    this.edit_marca.setFont(new Font("Tahoma", Font.PLAIN, 12)); 
-	    this.edit_marca.setColumns(10);
-	    initComponents(); 
+		this.edit_modelo.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		this.edit_modelo.setColumns(10);
+		this.edit_marca.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		this.edit_marca.setColumns(10);
+		initComponents();
 	}
-	
-	
+
 	private void initComponents() {
 		setBackground(new Color(192, 192, 192));
 		setBounds(100, 100, 1280, 720);
@@ -80,7 +79,8 @@ public class JPanel_cadastroAutomoveis extends JPanel {
 		add(panel_usuario, "cell 2 0 2 1,grow");
 
 		panel_menu.setBackground(Color.WHITE);
-		panel_menu.setLayout(new MigLayout("insets 10, gap 10", "[grow][][grow][][grow][][grow][][grow]", "[grow][][grow]"));
+		panel_menu.setLayout(
+				new MigLayout("insets 10, gap 10", "[grow][][grow][][grow][][grow][][grow]", "[grow][][grow]"));
 		this.lbl_menu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -108,6 +108,7 @@ public class JPanel_cadastroAutomoveis extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				abrirTelaConsulta();
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				lbl_consultarMenu.setForeground(new Color(170, 60, 45));
@@ -146,7 +147,8 @@ public class JPanel_cadastroAutomoveis extends JPanel {
 
 		panel.setBackground(Color.WHITE);
 		add(panel, "cell 0 2 3 1,grow");
-		panel.setLayout(new MigLayout("", "[grow][40%,grow][grow]", "[grow][][20px][][grow][][35px][][35px][][35px][][35px][][35px][20px][35px][grow][][grow]"));
+		panel.setLayout(new MigLayout("", "[grow][40%,grow][grow]",
+				"[grow][][20px][][grow][][35px][][35px][][35px][][35px][][35px][20px][35px][grow][][grow]"));
 		lbl_cadastrar.setFont(new Font("Tahoma", Font.BOLD, 30));
 		panel.add(lbl_cadastrar, "cell 1 1,alignx center,aligny center");
 		lbl_infoCad.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -197,54 +199,51 @@ public class JPanel_cadastroAutomoveis extends JPanel {
 		lbl_homepage.setFont(new Font("Tahoma", Font.BOLD, 11));
 		panel.add(lbl_homepage, "cell 1 18,alignx center");
 		this.btn_cadVeiculo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cadastrarVeiculo();
-            }
-        });
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cadastrarVeiculo();
+			}
+		});
 	}
-	
+
 	private void cadastrarVeiculo() {
-        String marca = edit_marca.getText();
-        String modelo = edit_modelo.getText();
-        String ano = edit_ano.getText();
-        String cor = edit_cor.getText();
-        String combustivel = edit_combust.getText();
-        if (marca.isEmpty() || modelo.isEmpty() || ano.isEmpty() || cor.isEmpty() || combustivel.isEmpty()) {
-        	JOptionPane.showMessageDialog(this, "Todos os campos devem ser preenchidos.", "Erro", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        Automovel automovel = new Automovel(marca, modelo, ano, cor, combustivel);
-        AutomovelDAO dao = new AutomovelDAO();
-        boolean sucesso = dao.inserir(automovel);
-        if (sucesso) {
-        	   JOptionPane.showMessageDialog(this, "Erro ao cadastrar veículo.", "Erro", JOptionPane.ERROR_MESSAGE);
-        } else {
-        	JOptionPane.showMessageDialog(this, "Veículo cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            abrirTelaMenu();
-        }
-    }
-	
-	public void setUsuario(String nomeUsuario) {
-        lbl_usuario.setText("Bem-vindo, " + nomeUsuario);
-    }
-    
+		String marca = edit_marca.getText();
+		String modelo = edit_modelo.getText();
+		String ano = edit_ano.getText();
+		String cor = edit_cor.getText();
+		String combustivel = edit_combust.getText();
+		if (marca.isEmpty() || modelo.isEmpty() || ano.isEmpty() || cor.isEmpty() || combustivel.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Todos os campos devem ser preenchidos.", "Erro",
+					JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		Automovel automovel = new Automovel(marca, modelo, ano, cor, combustivel);
+		AutomovelDAO dao = new AutomovelDAO();
+		boolean sucesso = dao.inserir(automovel);
+		if (sucesso) {
+			JOptionPane.showMessageDialog(this, "Erro ao cadastrar veículo.", "Erro", JOptionPane.ERROR_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(this, "Veículo cadastrado com sucesso!", "Sucesso",
+					JOptionPane.INFORMATION_MESSAGE);
+			abrirTelaMenu();
+		}
+	}
 
 	protected void abrirTelaMenu() {
 		JFrame_automoveis.frame.setContentPane(new JPanel_menuPrincipal());
 		JFrame_automoveis.frame.setVisible(true);
 	}
-	
+
 	protected void abrirTelaCadastro() {
-		JFrame_automoveis.frame.setContentPane( new JPanel_cadastroAutomoveis());
-	    JFrame_automoveis.frame.setVisible(true);
+		JFrame_automoveis.frame.setContentPane(new JPanel_cadastroAutomoveis());
+		JFrame_automoveis.frame.setVisible(true);
 	}
-	
+
 	protected void abrirTelaConsulta() {
 		JFrame_automoveis.frame.setContentPane(new JPanel_consultaAutomoveis());
 		JFrame_automoveis.frame.setVisible(true);
 	}
-	
+
 	protected void abrirTelaAlterar() {
 		JFrame_automoveis.frame.setContentPane(new JPanel_alterarAutomoveis());
 		JFrame_automoveis.frame.setVisible(true);

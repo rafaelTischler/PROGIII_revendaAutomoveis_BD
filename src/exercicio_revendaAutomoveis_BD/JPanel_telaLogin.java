@@ -1,24 +1,10 @@
 package exercicio_revendaAutomoveis_BD;
 
-import java.awt.Graphics;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
+import java.awt.*;
+import javax.swing.*;
 import net.miginfocom.swing.MigLayout;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.Color;
-import java.awt.Cursor;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.event.*;
+import java.sql.*;
 
 public class JPanel_telaLogin extends JPanel {
 
@@ -32,9 +18,7 @@ public class JPanel_telaLogin extends JPanel {
 	private final JLabel lblNewLabel_3 = new JLabel("Senha");
 	private final JPasswordField edit_senha = new JPasswordField();
 	private final JButton btn_entrar = new JButton("Entrar");
-	private final JLabel lbl_criar = new JLabel("Ainda não tem uma conta ? Cadastre-se");
-	public static boolean usuarioLogado = false;
-	public static String nomeUsuario;
+	private final JLabel lbl_criar = new JLabel("Ainda não tem uma conta? Cadastre-se");
 
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -103,7 +87,7 @@ public class JPanel_telaLogin extends JPanel {
 		String senha = new String(edit_senha.getPassword());
 		if (login.isEmpty() || senha.isEmpty()) {
 			lblNewLabel.setText(
-					"<html><div style= text-align:left>Por favor, preencha ambos<br>os campos de<br>login e senha.</div></html>");
+					"<html><div style='text-align:left'>Por favor, preencha ambos<br>os campos de<br>login e senha.</div></html>");
 			return;
 		}
 
@@ -116,48 +100,34 @@ public class JPanel_telaLogin extends JPanel {
 				stmt.setString(2, senha);
 				ResultSet rs = stmt.executeQuery();
 				if (rs.next()) {
-					nomeUsuario = rs.getString("nome");
-					usuarioLogado = true;
-					abrirMenuPrincipal(nomeUsuario);
-
+					UsuarioLogado.setNomeUsuario(rs.getString("nome")); // Salva o nome do usuário
+					abrirMenuPrincipal();
 				} else {
 					lblNewLabel
-							.setText("<html><div style= text-align:left>Usuário ou<br>senha inválidos.</div></html>");
+							.setText("<html><div style='text-align:left'>Usuário ou<br>senha inválidos.</div></html>");
 				}
-
 				rs.close();
 				stmt.close();
 				conn.close();
 			} catch (SQLException ex) {
 				ex.printStackTrace();
-				lblNewLabel.setText("<html><div style= textalign: left>Erro na conexão<br>com o banco de dados.</div></html>");
+				lblNewLabel.setText(
+						"<html><div style='text-align:left'>Erro na conexão<br>com o banco de dados.</div></html>");
 			}
 		} else {
-			lblNewLabel.setText("<html><div style= textalign: left>Erro na conexão<br>com o banco de dados.</div></html>");
+			lblNewLabel.setText(
+					"<html><div style='text-align:left'>Erro na conexão<br>com o banco de dados.</div></html>");
 		}
 	}
 
-	private void abrirMenuPrincipal(String nomeUsuario) {
-		if (usuarioLogado) {
-			JPanel_menuPrincipal menu = new JPanel_menuPrincipal();
-			menu.setUsuario(nomeUsuario);
-			JFrame_automoveis.frame.setContentPane(menu);
-			JFrame_automoveis.frame.setVisible(true);
-		} else {
-			lblNewLabel.setText("Você precisa fazer login primeiro.");
-		}
+	private void abrirMenuPrincipal() {
+		JPanel_menuPrincipal menu = new JPanel_menuPrincipal();
+		JFrame_automoveis.frame.setContentPane(menu);
+		JFrame_automoveis.frame.setVisible(true);
 	}
 
 	private void abrirTelaCadastroUsuario() {
 		JFrame_automoveis.frame.setContentPane(new JPanel_cadastroUsuario());
 		JFrame_automoveis.frame.setVisible(true);
 	}
-
-	protected void abrirTelaCadastroAutomoveis(String nomeUsuario) {
-		JPanel_cadastroAutomoveis panelCadastro = new JPanel_cadastroAutomoveis();
-		panelCadastro.setUsuario(nomeUsuario);
-		JFrame_automoveis.frame.setContentPane(panelCadastro);
-		JFrame_automoveis.frame.setVisible(true);
-	}
-
 }
