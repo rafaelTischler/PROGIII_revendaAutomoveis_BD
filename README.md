@@ -20,7 +20,7 @@ abrangendo desde o login de usuários até a exclusão de automóveis.
 - Validações para evitar campos vazios ou dados inválidos.  
 
 ### 3. **Consulta de Automóveis**  
-- Pesquise veículos cadastrados com base em diferentes critérios (ex.: marca, modelo, ID).  
+- Pesquise veículos cadastrados com base em diferentes critérios (ex.: marca, modelo, ano).  
 - Visualize a lista completa de veículos armazenados no sistema.  
 
 ### 4. **Alteração de Dados**  
@@ -36,7 +36,7 @@ abrangendo desde o login de usuários até a exclusão de automóveis.
 - Feedback visual para interações, como alterações de cor ao passar o mouse sobre os menus.  
 
 ### 7. **Interface Customizada**  
-- Design responsivo utilizando **MigLayout** para uma organização clara e adaptável.  
+- Design utilizando **MigLayout** para uma organização clara e adaptável.  
 - Imagem de fundo personalizada para cada tela.  
 
 ## 🌟 Screenshots  
@@ -80,7 +80,7 @@ abrangendo desde o login de usuários até a exclusão de automóveis.
 
 1. Clone o repositório para sua máquina local:  
    ```bash  
-   git clone [https://github.com/rafaelTischler/PROGIII_revendaAutomoveis_BD.git]
+   git clone https://github.com/rafaelTischler/PROGIII_revendaAutomoveis_BD.git
    ```  
 2. Importe o projeto para sua IDE favorita (ex.: IntelliJ IDEA, Eclipse).  
 3. Configure o caminho para as imagens na pasta `src/img`.  
@@ -91,5 +91,5 @@ abrangendo desde o login de usuários até a exclusão de automóveis.
 - **Linguagem:** Java  
 - **Interface Gráfica:** Swing  
 - **Gerenciamento de Layout:** MigLayout  
-- **Banco de Dados:** Conexão JDBC com banco relacional  
-- **IDE:** Eclipse/IntelliJ IDEA  
+- **Banco de Dados:** Conexão JDBC com banco relacional MySQL 
+- **IDE:** Eclipse 2024.06  
