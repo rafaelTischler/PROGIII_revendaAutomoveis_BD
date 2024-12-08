@@ -5,6 +5,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JTextField;
@@ -13,7 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JScrollPane;
 
 public class JPanel_alterarAutomoveis extends JPanel {
 
@@ -46,7 +46,7 @@ public class JPanel_alterarAutomoveis extends JPanel {
 	private final JLabel lbl_alterarRemoverMenu = new JLabel("ALTERAR OU REMOVER");
 	private final JButton btn_remover = new JButton("Remover");
 	private final JLabel lbl_id = new JLabel("Buscar por ID");
-	private final JTextField textField = new JTextField();
+	private final JTextField edit_id = new JTextField();
 	private final JButton btn_cadVeiculo_1_1 = new JButton("Buscar");
 	private final JLabel lbl_infoCad_1 = new JLabel(
 			"<html><div style='text-align: left;'>Clique sobre os campos de edição de texto para editar. <br>Salve as alterações ou remova o veículo do estoque</div></html>");
@@ -212,47 +212,124 @@ public class JPanel_alterarAutomoveis extends JPanel {
 		this.btn_remover.setForeground(Color.BLACK);
 		this.btn_remover.setFont(new Font("Tahoma", Font.BOLD, 12));
 		this.btn_remover.setBackground(new Color(225, 225, 225));
+		btn_remover.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				removerVeiculo();
+			}
+		});
 		this.panel.add(this.btn_remover, "flowx,cell 1 16,alignx center,growy");
 		btn_salvarAlteracoes.setBackground(new Color(170, 60, 45));
 		btn_salvarAlteracoes.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btn_salvarAlteracoes.setForeground(Color.WHITE);
 		panel.add(btn_salvarAlteracoes, "cell 1 16,grow");
-		this.btn_salvarAlteracoes.addActionListener(new ActionListener() {
+		btn_salvarAlteracoes.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				alterarVeiculo();
+				salvarAlteracoes();
 			}
 		});
-		this.textField.setBackground(Color.WHITE);
-		this.textField
-				.setToolTipText("Informe o ID do veículo que deseja alterar características ou remover do estoque");
-		this.textField.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		this.textField.setColumns(10);
-		add(this.textField, "flowx,cell 1 7,grow");
+		this.edit_id.setBackground(Color.WHITE);
+		this.edit_id.setToolTipText("Informe o ID do veículo que deseja alterar características ou remover do estoque");
+		this.edit_id.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		this.edit_id.setColumns(10);
+		add(this.edit_id, "flowx,cell 1 7,grow");
 		this.btn_cadVeiculo_1_1.setForeground(Color.WHITE);
 		this.btn_cadVeiculo_1_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		this.btn_cadVeiculo_1_1.setBackground(new Color(170, 60, 45));
+		btn_cadVeiculo_1_1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				buscarVeiculoPorId();
+			}
+		});
 		add(this.btn_cadVeiculo_1_1, "cell 2 7,growy");
 	}
 
-	private void alterarVeiculo() {
-		String marca = edit_marca.getText();
-		String modelo = edit_modelo.getText();
-		String ano = edit_ano.getText();
-		String cor = edit_cor.getText();
-		String combustivel = edit_combust.getText();
-		if (marca.isEmpty() || modelo.isEmpty() || ano.isEmpty() || cor.isEmpty() || combustivel.isEmpty()) {
-			System.out.println("Todos os campos devem ser preenchidos.");
+	private void buscarVeiculoPorId() {
+		String idStr = edit_id.getText().trim();
+
+		if (idStr.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Informe um ID válido!");
 			return;
 		}
-		Automovel automovel = new Automovel(marca, modelo, ano, cor, combustivel);
-		AutomovelDAO dao = new AutomovelDAO();
-		boolean sucesso = dao.inserir(automovel);
-		if (sucesso) {
-			System.out.println("Erro ao cadastrar veículo.");
-		} else {
-			System.out.println("Veículo cadastrado com sucesso.");
+
+		try {
+			int id = Integer.parseInt(idStr);
+			AutomovelDAO dao = new AutomovelDAO();
+			Automovel automovel = dao.buscarPorId(id);
+
+			if (automovel != null) {
+				edit_marca.setText(automovel.getMarca());
+				edit_modelo.setText(automovel.getModelo());
+				edit_ano.setText(automovel.getAno());
+				edit_cor.setText(automovel.getCor());
+				edit_combust.setText(automovel.getCombustivel());
+			} else {
+				JOptionPane.showMessageDialog(null, "Veículo não encontrado para o ID informado.");
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "Formato de ID inválido!");
 		}
+	}
+
+	private void salvarAlteracoes() {
+		String idStr = edit_id.getText().trim();
+		String marca = edit_marca.getText().trim();
+		String modelo = edit_modelo.getText().trim();
+		String ano = edit_ano.getText().trim();
+		String cor = edit_cor.getText().trim();
+		String combustivel = edit_combust.getText().trim();
+
+		if (idStr.isEmpty() || marca.isEmpty() || modelo.isEmpty() || ano.isEmpty() || cor.isEmpty()
+				|| combustivel.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos para salvar as alterações!");
+			return;
+		}
+
+		try {
+			int id = Integer.parseInt(idStr);
+			Automovel automovel = new Automovel(marca, modelo, ano, cor, combustivel);
+			automovel.setId(id);
+
+			AutomovelDAO dao = new AutomovelDAO();
+			boolean sucesso = dao.atualizar(automovel);
+
+			if (sucesso) {
+				JOptionPane.showMessageDialog(null, "Veículo atualizado com sucesso!");
+			} else {
+				JOptionPane.showMessageDialog(null, "Erro ao atualizar o veículo.");
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "Formato de ID inválido!");
+		}
+	}
+
+	private void removerVeiculo() {
+		String id = edit_id.getText().trim();
+		if (id.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Informe um ID válido para remover o veículo!");
+			return;
+		}
+
+		AutomovelDAO dao = new AutomovelDAO();
+		boolean sucesso = dao.remover(id);
+
+		if (sucesso) {
+			JOptionPane.showMessageDialog(null, "Veículo removido com sucesso!");
+			limparCampos();
+		} else {
+			JOptionPane.showMessageDialog(null, "Erro ao remover o veículo.");
+		}
+	}
+
+	private void limparCampos() {
+		edit_id.setText("");
+		edit_marca.setText("");
+		edit_modelo.setText("");
+		edit_ano.setText("");
+		edit_cor.setText("");
+		edit_combust.setText("");
 	}
 
 	public void setUsuario(String nomeUsuario) {

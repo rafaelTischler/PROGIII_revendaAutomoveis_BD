@@ -106,7 +106,8 @@ public class AutomovelDAO {
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				Automovel A = new Automovel(rs.getString("marca"), rs.getString("modelo"), rs.getString("ano"), rs.getString("cor"), rs.getString("combustivel"));
+				Automovel A = new Automovel(rs.getString("marca"), rs.getString("modelo"), rs.getString("ano"),
+						rs.getString("cor"), rs.getString("combustivel"));
 				A.setId(rs.getInt("id"));
 				return A;
 			}
@@ -132,7 +133,8 @@ public class AutomovelDAO {
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				Automovel A = new Automovel(rs.getString("marca"), rs.getString("modelo"), rs.getString("ano"), rs.getString("cor"), rs.getString("combustivel"));
+				Automovel A = new Automovel(rs.getString("marca"), rs.getString("modelo"), rs.getString("ano"),
+						rs.getString("cor"), rs.getString("combustivel"));
 				lista.add(A);
 			}
 		} catch (SQLException e) {
@@ -149,7 +151,8 @@ public class AutomovelDAO {
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				Automovel A = new Automovel(rs.getString("marca"), rs.getString("modelo"), rs.getString("ano"), rs.getString("cor"), rs.getString("combustivel"));
+				Automovel A = new Automovel(rs.getString("marca"), rs.getString("modelo"), rs.getString("ano"),
+						rs.getString("cor"), rs.getString("combustivel"));
 				A.setId(rs.getInt("id"));
 				lista.add(A);
 			}
@@ -159,7 +162,55 @@ public class AutomovelDAO {
 			System.out.println("Erro ao consultar Automoveis");
 			return null;
 		}
+	}
 
+	public Automovel buscarPorId(int id) {
+		String sql = "SELECT * FROM automovel WHERE id = ?";
+		try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				Automovel automovel = new Automovel(rs.getString("marca"), rs.getString("modelo"), rs.getString("ano"),
+						rs.getString("cor"), rs.getString("combustivel"));
+				automovel.setId(rs.getInt("id"));
+				return automovel;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public boolean atualizar(Automovel automovel) {
+		String sql = "UPDATE automovel SET marca = ?, modelo = ?, ano = ?, cor = ?, combustivel = ? WHERE id = ?";
+		try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+			stmt.setString(1, automovel.getMarca());
+			stmt.setString(2, automovel.getModelo());
+			stmt.setString(3, automovel.getAno());
+			stmt.setString(4, automovel.getCor());
+			stmt.setString(5, automovel.getCombustivel());
+			stmt.setInt(6, automovel.getId());
+
+			int rowsUpdated = stmt.executeUpdate();
+			return rowsUpdated > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public boolean remover(String id) {
+		String sql = "DELETE FROM automovel WHERE id = ?";
+		try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+
+			stmt.setInt(1, Integer.parseInt(id));
+
+			int rowsDeleted = stmt.executeUpdate();
+			return rowsDeleted > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }
