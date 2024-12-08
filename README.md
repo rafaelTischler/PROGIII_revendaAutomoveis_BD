@@ -80,7 +80,7 @@ abrangendo desde o login de usuários até a exclusão de automóveis.
 
 1. Clone o repositório para sua máquina local:  
    ```bash  
-   git clone https://github.com/seu-usuario/nome-do-repositorio.git  
+   git clone [https://github.com/rafaelTischler/PROGIII_revendaAutomoveis_BD.git]
    ```  
 2. Importe o projeto para sua IDE favorita (ex.: IntelliJ IDEA, Eclipse).  
 3. Configure o caminho para as imagens na pasta `src/img`.  
