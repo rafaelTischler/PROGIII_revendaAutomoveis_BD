@@ -8,12 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import net.miginfocom.swing.MigLayout;
-import javax.swing.JButton;
-import javax.swing.UIManager;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class JPanel_menuPrincipal extends JPanel {
 
@@ -27,10 +23,11 @@ public class JPanel_menuPrincipal extends JPanel {
 	private final JLabel lbl_cadastrar = new JLabel("CADASTRAR");
 	private final JLabel lbl_consultar = new JLabel("CONSULTAR");
 	private final JLabel lbl_alterarRemover = new JLabel("ALTERAR OU REMOVER");
-	private final JLabel lbl_titulo = new JLabel("<html><div style='text-align: left;'>A maneira mais fácil de <br>encontrar e gerenciar <br> seus veículos</div></html>");
-	private final JLabel lbl_texto = new JLabel("<html><div style='text-align: left;'>Aqui você pode cadastrar, consultar e atualizar o seu estoque de<br>carros de forma rápida e prática. Gerencie informações como marca,<br>modelo, cor, ano e tipo de combustível com facilidade. Acesse<br>sua conta e aproveite para manter seu inventário sempre atualizado!</div></html>");
+	private final JLabel lbl_titulo = new JLabel(
+			"<html><div style='text-align: left;'>A maneira mais fácil de <br>encontrar e gerenciar <br> seus veículos</div></html>");
+	private final JLabel lbl_texto = new JLabel(
+			"<html><div style='text-align: left;'>Aqui você pode cadastrar, consultar e atualizar o seu estoque de<br>carros de forma rápida e prática. Gerencie informações como marca,<br>modelo, cor, ano e tipo de combustível com facilidade. Acesse<br>sua conta e aproveite para manter seu inventário sempre atualizado!</div></html>");
 	private final JLabel lblDireitosAutorais = new JLabel();
-	private final JButton btn_comecar = new JButton("Começar");
 
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -48,7 +45,8 @@ public class JPanel_menuPrincipal extends JPanel {
 		setFocusTraversalKeysEnabled(false);
 		setBackground(Color.GRAY);
 		setBounds(100, 100, 1280, 720);
-		setLayout(new MigLayout("insets 0, gap 0", "[100px][150px][grow][grow]", "[25px][50px][150px][][30px][][30px][30px][grow][]"));
+		setLayout(new MigLayout("insets 0, gap 0", "[100px][150px][grow][grow]",
+				"[25px][50px][150px][][30px][][30px][grow][]"));
 
 		panel_logo.setBackground(new Color(170, 60, 45));
 		panel_logo.setLayout(new MigLayout("insets 10, gap 10", "[grow][][grow]", "[grow][][grow]"));
@@ -65,7 +63,8 @@ public class JPanel_menuPrincipal extends JPanel {
 		add(panel_usuario, "cell 2 0 2 1,grow");
 
 		panel_menu.setBackground(Color.WHITE);
-		panel_menu.setLayout(new MigLayout("insets 10, gap 10", "[grow][][grow][][grow][][grow][][grow]", "[grow][][grow]"));
+		panel_menu.setLayout(
+				new MigLayout("insets 10, gap 10", "[grow][][grow][][grow][][grow][][grow]", "[grow][][grow]"));
 		lbl_menu.setFont(new Font("Tahoma", Font.BOLD, 12));
 		panel_menu.add(lbl_menu, "cell 1 1");
 		this.lbl_cadastrar.addMouseListener(new MouseAdapter() {
@@ -135,46 +134,36 @@ public class JPanel_menuPrincipal extends JPanel {
 		this.lbl_texto.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 		add(this.lbl_texto, "cell 1 5 2 1");
-		this.btn_comecar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				abrirTelaLogin();
-			}
-		});
-		this.btn_comecar.setFocusPainted(false);
-		this.btn_comecar.setBorder(UIManager.getBorder("Button.border"));
-		this.btn_comecar.setBackground(new Color(170, 60, 45));
-		this.btn_comecar.setFont(new Font("Tahoma", Font.BOLD, 12));
-		this.btn_comecar.setForeground(Color.WHITE);
-		add(this.btn_comecar, "cell 1 7,grow");
-				add(this.lblDireitosAutorais, "cell 0 9 4 1,alignx center");
-		
-				lblDireitosAutorais.setText("© 2024 Direitos Autorais - Carolini Bassan Carlé e Rafael Müller Tischler | ADS 19 | IFFar - Campus São Vicente do Sul");
-				lblDireitosAutorais.setFont(new Font("Tahoma", Font.PLAIN, 8));
-				lblDireitosAutorais.setHorizontalAlignment(SwingConstants.CENTER);
-				lblDireitosAutorais.setForeground(Color.WHITE);
+		add(this.lblDireitosAutorais, "cell 0 8 4 1,alignx center");
+
+		lblDireitosAutorais.setText(
+				"© 2024 Direitos Autorais - Carolini Bassan Carlé e Rafael Müller Tischler | ADS 19 | IFFar - Campus São Vicente do Sul");
+		lblDireitosAutorais.setFont(new Font("Tahoma", Font.PLAIN, 8));
+		lblDireitosAutorais.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDireitosAutorais.setForeground(Color.WHITE);
 	}
 
 	public void setUsuario(String nomeUsuario) {
-        lbl_usuario.setText("Bem-vindo, " + nomeUsuario);
-    }
+		lbl_usuario.setText("Bem-vindo, " + nomeUsuario);
+	}
 
-    protected void abrirTelaLogin() {
-        JFrame_automoveis.frame.setContentPane(new JPanel_telaLogin());
-        JFrame_automoveis.frame.setVisible(true);
-    }
+	protected void abrirTelaLogin() {
+		JFrame_automoveis.frame.setContentPane(new JPanel_telaLogin());
+		JFrame_automoveis.frame.setVisible(true);
+	}
 
-    protected void abrirTelaCadastro() {
-        JFrame_automoveis.frame.setContentPane(new JPanel_cadastroAutomoveis());
-        JFrame_automoveis.frame.setVisible(true);
-    }
+	protected void abrirTelaCadastro() {
+		JFrame_automoveis.frame.setContentPane(new JPanel_cadastroAutomoveis());
+		JFrame_automoveis.frame.setVisible(true);
+	}
 
-    protected void abrirTelaConsulta() {
-        JFrame_automoveis.frame.setContentPane(new JPanel_consultaAutomoveis());
-        JFrame_automoveis.frame.setVisible(true);
-    }
+	protected void abrirTelaConsulta() {
+		JFrame_automoveis.frame.setContentPane(new JPanel_consultaAutomoveis());
+		JFrame_automoveis.frame.setVisible(true);
+	}
 
-    protected void abrirTelaAlterar() {
-        JFrame_automoveis.frame.setContentPane(new JPanel_alterarAutomoveis());
-        JFrame_automoveis.frame.setVisible(true);
-    }
+	protected void abrirTelaAlterar() {
+		JFrame_automoveis.frame.setContentPane(new JPanel_alterarAutomoveis());
+		JFrame_automoveis.frame.setVisible(true);
+	}
 }
