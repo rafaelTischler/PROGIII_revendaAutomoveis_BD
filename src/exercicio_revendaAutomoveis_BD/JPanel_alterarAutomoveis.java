@@ -38,7 +38,7 @@ public class JPanel_alterarAutomoveis extends JPanel {
 	private final JPanel panel_logo = new JPanel();
 	private final JPanel panel_usuario = new JPanel();
 	private final JPanel panel_menu = new JPanel();
-	private final JLabel lbl_logoPanel = new JLabel("LOGO");
+	private final JLabel lbl_logoPanel = new JLabel("Cars.");
 	private final JLabel lbl_usuario = new JLabel("Bem-vindo, Usuário");
 	private final JLabel lbl_menu = new JLabel("MENU");
 	private final JLabel lbl_cadastrarMenu = new JLabel("CADASTRAR");
@@ -50,11 +50,12 @@ public class JPanel_alterarAutomoveis extends JPanel {
 	private final JButton btn_cadVeiculo_1_1 = new JButton("Buscar");
 	private final JLabel lbl_infoCad_1 = new JLabel(
 			"<html><div style='text-align: left;'>Clique sobre os campos de edição de texto para editar. <br>Salve as alterações ou remova o veículo do estoque</div></html>");
+	private final JLabel lblNewLabel = new JLabel("     ");
 
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		ImageIcon background = new ImageIcon(getClass().getResource("/img/bmw_cad.png"));
+		ImageIcon background = new ImageIcon(getClass().getResource("/img/bmw_alterar.png"));
 		g.drawImage(background.getImage(), 0, 0, getWidth(), getHeight(), this);
 	}
 
@@ -69,8 +70,7 @@ public class JPanel_alterarAutomoveis extends JPanel {
 	private void initComponents() {
 		setBackground(new Color(192, 192, 192));
 		setBounds(100, 100, 1280, 720);
-		setLayout(new MigLayout("insets 0, gap 0", "[100px:n][::150px,grow][262px,grow][40%]",
-				"[25px][50px][150px:n][][30px:n][][30px:n][35px:n][grow]"));
+		setLayout(new MigLayout("insets 0, gap 0", "[100px:n][::150px,grow][262px,grow][100px:n][40%]", "[25px][50px][45px:n][][30px:n][][30px:n][35px:n][grow]"));
 
 		panel_logo.setBackground(new Color(170, 60, 45));
 		panel_logo.setLayout(new MigLayout("insets 10, gap 10", "[grow][][grow]", "[grow][][grow]"));
@@ -84,7 +84,7 @@ public class JPanel_alterarAutomoveis extends JPanel {
 		lbl_usuario.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		lbl_usuario.setForeground(Color.WHITE);
 		panel_usuario.add(lbl_usuario, "cell 1 0,alignx center");
-		add(panel_usuario, "cell 2 0 2 1,grow");
+		add(panel_usuario, "cell 2 0 3 1,grow");
 
 		panel_menu.setBackground(Color.WHITE);
 		panel_menu.setLayout(
@@ -151,7 +151,7 @@ public class JPanel_alterarAutomoveis extends JPanel {
 		lbl_alterarRemoverMenu.setForeground(Color.BLACK);
 		panel_menu.add(lbl_alterarRemoverMenu, "cell 7 1");
 
-		add(panel_menu, "cell 2 1 2 1,grow");
+		add(panel_menu, "cell 2 1 3 1,grow");
 		add(this.lbl_id, "cell 1 3");
 		this.lbl_id.setForeground(Color.WHITE);
 		this.lbl_id.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -160,7 +160,7 @@ public class JPanel_alterarAutomoveis extends JPanel {
 		this.lbl_infoCad.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		panel.setBackground(Color.WHITE);
-		add(panel, "cell 3 2 1 7,grow");
+		add(panel, "cell 4 2 1 7,grow");
 		panel.setLayout(new MigLayout("", "[grow][40%,grow][grow]",
 				"[grow][][][][grow][][35px][][35px][][35px][][35px][][35px][20px][35px][grow][][grow]"));
 		lbl_cadastrar.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -229,11 +229,6 @@ public class JPanel_alterarAutomoveis extends JPanel {
 				salvarAlteracoes();
 			}
 		});
-		this.edit_id.setBackground(Color.WHITE);
-		this.edit_id.setToolTipText("Informe o ID do veículo que deseja alterar características ou remover do estoque");
-		this.edit_id.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		this.edit_id.setColumns(10);
-		add(this.edit_id, "flowx,cell 1 7,grow");
 		this.btn_cadVeiculo_1_1.setForeground(Color.WHITE);
 		this.btn_cadVeiculo_1_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		this.btn_cadVeiculo_1_1.setBackground(new Color(170, 60, 45));
@@ -243,7 +238,15 @@ public class JPanel_alterarAutomoveis extends JPanel {
 				buscarVeiculoPorId();
 			}
 		});
-		add(this.btn_cadVeiculo_1_1, "cell 2 7,growy");
+		this.edit_id.setBackground(Color.WHITE);
+		this.edit_id.setToolTipText("Informe o ID do veículo que deseja alterar características ou remover do estoque");
+		this.edit_id.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		this.edit_id.setColumns(10);
+		add(this.edit_id, "flowx,cell 2 7,alignx right,growy");
+		add(this.btn_cadVeiculo_1_1, "cell 2 7,alignx right,growy");
+		this.lblNewLabel.setVisible(false);
+		this.lblNewLabel.setEnabled(false);
+		add(this.lblNewLabel, "cell 2 7");
 	}
 
 	private void buscarVeiculoPorId() {

@@ -130,10 +130,10 @@ public class JPanel_telaLogin extends JPanel {
 				conn.close();
 			} catch (SQLException ex) {
 				ex.printStackTrace();
-				lblNewLabel.setText("Erro na conexão com o banco de dados.");
+				lblNewLabel.setText("<html><div style= textalign: left>Erro na conexão<br>com o banco de dados.</div></html>");
 			}
 		} else {
-			lblNewLabel.setText("Erro na conexão com o banco de dados.");
+			lblNewLabel.setText("<html><div style= textalign: left>Erro na conexão<br>com o banco de dados.</div></html>");
 		}
 	}
 

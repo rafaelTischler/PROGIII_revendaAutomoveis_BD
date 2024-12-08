@@ -27,7 +27,7 @@ public class JPanel_consultaAutomoveis extends JPanel {
 	private final JPanel panel_logo = new JPanel();
 	private final JPanel panel_usuario = new JPanel();
 	private final JPanel panel_menu = new JPanel();
-	private final JLabel lbl_logoPanel = new JLabel("LOGO");
+	private final JLabel lbl_logoPanel = new JLabel("Cars.");
 	private final JLabel lblNewLabel = new JLabel("Bem-vindo, Usuário");
 	private final JLabel lbl_menu = new JLabel("MENU");
 	private final JLabel lbl_cadastrar = new JLabel("CADASTRAR");
@@ -67,7 +67,7 @@ public class JPanel_consultaAutomoveis extends JPanel {
 		setFocusTraversalKeysEnabled(false);
 		setBackground(Color.GRAY);
 		setBounds(100, 100, 1280, 720);
-		setLayout(new MigLayout("insets 0, gap 0", "[100px][150px][grow][150px:n:150px][30px][150px:n:150px][30px][150px:n:150px][grow][250px]", "[25px][50px][75px:n][30px][100px:n][30px:n][grow]"));
+		setLayout(new MigLayout("insets 0, gap 0", "[100px][150px][grow][150px:n:150px][30px][150px:n:150px][30px][150px:n:150px][grow][250px]", "[25px][50px][75px:n][30px][100px:n][75px:n,baseline][grow]"));
 		panel_logo.setBackground(new Color(170, 60, 45));
 		panel_logo.setLayout(new MigLayout("insets 10, gap 10", "[grow][][grow]", "[grow][][grow]"));
 		this.lbl_logoPanel.setForeground(Color.WHITE);
@@ -177,7 +177,7 @@ public class JPanel_consultaAutomoveis extends JPanel {
 		this.btn_buscar.setForeground(Color.WHITE);
 		this.panel_busca.add(this.btn_buscar, "cell 3 2,grow");
 		this.panel_tabela.setBackground(Color.WHITE);
-		add(this.panel_tabela, "cell 0 6 10 1,grow");
+		add(this.panel_tabela, "cell 0 6 10 1,growx,aligny baseline");
 		this.panel_tabela.setLayout(new MigLayout("", "[grow][70%][grow]", "[30px][grow]"));
 		this.scrollPane.setForeground(Color.BLACK);
 		this.panel_tabela.add(this.scrollPane, "cell 1 1,grow");

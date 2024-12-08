@@ -19,7 +19,7 @@ public class JPanel_cadastroUsuario extends JPanel {
 	private final JPanel panel = new JPanel();
 	private final JLabel lbl_cadastrar = new JLabel("Cadastrar Usuário");
 	private final JLabel lbl_infoCad = new JLabel(
-			"<html>\r\n  <div style='text-align: left;'>\r\n    Preencha as informações abaixo para cadastrar um novo usuário no sistema. \r\n    Essas são informações essenciais para criar sua conta e acessar todas as funcionalidades da Revenda de Automóveis. \r\n    <br>Ao clicar em cadastrar, seu usuário será registrado e poderá realizar pedidos de forma rápida e prática.\r\n  </div>\r\n</html>\r\n\r\n\r\n\r\n\r\n\r\n");
+			"<html>\r\n  <div style='text-align: left;'>\r\n    Preencha as informações abaixo para cadastrar um novo usuário no sistema. \r\n    Essas são informações essenciais para criar sua conta e acessar todas as funcionalidades do sistema. \r\n    <br>Ao clicar em cadastrar, seu usuário será registrado e poderá realizar pedidos de forma rápida e prática.\r\n  </div>\r\n</html>\r\n\r\n\r\n\r\n\r\n\r\n");
 	private final JLabel lbl_nome = new JLabel("Nome");
 	private final JTextField edit_nome = new JTextField();
 	private final JLabel lbl_email = new JLabel("E-mail");
@@ -34,7 +34,7 @@ public class JPanel_cadastroUsuario extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		ImageIcon background = new ImageIcon(getClass().getResource("/img/bmw_login.png"));
+		ImageIcon background = new ImageIcon(getClass().getResource("/img/bmw_cadUsuario.png"));
 		g.drawImage(background.getImage(), 0, 0, getWidth(), getHeight(), this);
 	}
 

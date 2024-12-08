@@ -17,7 +17,7 @@ public class JPanel_menuPrincipal extends JPanel {
 	private final JPanel panel_logo = new JPanel();
 	private final JPanel panel_usuario = new JPanel();
 	private final JPanel panel_menu = new JPanel();
-	private final JLabel lbl_logoPanel = new JLabel("LOGO");
+	private final JLabel lbl_logoPanel = new JLabel("Cars.");
 	private final JLabel lbl_usuario = new JLabel("Bem-vindo, Usuário");
 	private final JLabel lbl_menu = new JLabel("MENU");
 	private final JLabel lbl_cadastrar = new JLabel("CADASTRAR");
